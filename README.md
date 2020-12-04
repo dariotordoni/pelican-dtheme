@@ -183,7 +183,7 @@ TOC = {
 ```bash
 SITEURL = '' # website url
 RELATIVE_URLS = False
-MENUITEMS = (('BLOG', 'https://www.dariotordoni.it/blog/'),('ABOUT', 'https://www.dariotordoni.it/chi-sono/'),) #this is the filed to use in order to set the menu items
+MENUITEMS = (('BLOG', ''),('ABOUT', ''),) #this is the filed to use in order to set the menu items
 #FEED_ALL_ATOM = 'feeds/all.atom.xml' commented by default
 FEED_ALL_RSS = 'feeds/all.rss.xml'
 DELETE_OUTPUT_DIRECTORY = True
