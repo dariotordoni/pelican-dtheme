@@ -20,9 +20,7 @@ PATH = 'content'
 STATIC_PATHS = ['extra']
 MENUITEMS = (('BLOG', '/blog/'),('ABOUT', '/chi-sono/'),) # the template is made for a two menu items, blog and about page. In this way I can manage the menu without using a hamburger menu and without using a javascript. Also, I don't need more than two menu items right one.
 
-# use extra_path_metadata for static file needed in the root path
-EXTRA_PATH_METADATA = {
-    # example
+EXTRA_PATH_METADATA = { # use extra_path_metadata for static file needed in the root path, examples:
     'extra/robots.txt': {'path': 'robots.txt'},
     'extra/sw.js': {'path': 'sw.js'},
     'extra/manifest.json': {'path': 'manifest.json'},
