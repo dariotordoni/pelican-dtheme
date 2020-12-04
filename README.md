@@ -138,8 +138,8 @@ CATEGORIES = {
         'project_tool':'', # tool used for the project management
         'project_lang': '', # lang used for the project
         'project_version': '', # project version
-        'project_links': '', link to the project website
-        'project_author': '' @ author of the project
+        'project_links': '', # link to the project website
+        'project_author': '' # author of the project
     }
 }
 
