@@ -18,7 +18,7 @@ DEFAULT_LANG = u'it'
 TWITTERNAME = "" #twitter user name @example
 PATH = 'content'
 STATIC_PATHS = ['extra']
-MENUITEMS = (('BLOG', '/blog/'),('ABOUT', '/chi-sono/'),) # the template is made for a two menu items, blog and about page. In this way I can manage the menu without using a hamburger menu and without using a javascript. Also, I don't need more than two menu items right one.
+MENUITEMS = (('BLOG', '/blog/'),('ABOUT', '/chi-sono/'),) # the template is made for a two menu items, blog and about page. In this way I can manage the menu without using a hamburger menu and without using a javascript. Also, I don't need more than two menu items right one. At the moment there is a misconfiguration and this settings field is also in publishconf.py file, better to use the one in the publishconf.
 
 EXTRA_PATH_METADATA = { # use extra_path_metadata for static file needed in the root path, examples:
     'extra/robots.txt': {'path': 'robots.txt'},
@@ -175,4 +175,17 @@ SITEMAP = {
 TOC = {
     'TOC_INCLUDE_TITLE': 'false',     # If 'true' include title in toc
 }
+```
+
+## Publishconf
+
+### General
+```bash
+SITEURL = '' # website url
+RELATIVE_URLS = False
+MENUITEMS = (('BLOG', 'https://www.dariotordoni.it/blog/'),('ABOUT', 'https://www.dariotordoni.it/chi-sono/'),) #this is the filed to use in order to set the menu items
+#FEED_ALL_ATOM = 'feeds/all.atom.xml' commented by default
+FEED_ALL_RSS = 'feeds/all.rss.xml'
+DELETE_OUTPUT_DIRECTORY = True
+GTM = False # set True if want to install Google tag manager
 ```
