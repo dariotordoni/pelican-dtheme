@@ -1,5 +1,16 @@
 # pelican-dtheme
 
+DTeheme is a theme developed for Pelican. The goal is to create a theme that allows people to create a site fast, lightweight and attentive to the metrics of web vitals.
+This is not a documentation, but it is the closest thing to documentation that I can do right now. I hope it will be useful.
+[Here](https://www.dariotordoni.it) you can find my personal website where I use, at the time of writing, this theme.
+
+Some plugins are needed in order for the theme to work:
+* [readtime](https://github.com/getpelican/pelican-plugins/tree/master/readtime)
+* [sitemap](https://github.com/getpelican/pelican-plugins/tree/master/sitemap)
+* [cover_resizer]()
+* [neighbors](https://github.com/getpelican/pelican-plugins/tree/master/neighbors)
+* [pelican-toc](https://github.com/ingwinlu/pelican-toc) I just made some changes here, but haven't proposed them to its developer yet
+
 ## Pelicanconf
 
 ### General section
