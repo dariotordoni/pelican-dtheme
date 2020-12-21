@@ -1,6 +1,6 @@
 # pelican-dtheme
 
-DTeheme is a theme developed for Pelican. The goal is to create a theme that allows people to create a site fast, lightweight and attentive to the metrics of web vitals.
+DTeheme is a theme developed for Pelican. The goal is to create a theme that allows people to generate a fast website, lightweight and attentive to the metrics of web vitals.
 This is not a documentation, but it is the closest thing to documentation that I can do right now. I hope it will be useful.
 [Here](https://www.dariotordoni.it) you can find my personal website where I use, at the time of writing, this theme.
 
@@ -10,6 +10,7 @@ Some plugins are needed in order for the theme to work:
 * [cover_resizer]()
 * [neighbors](https://github.com/getpelican/pelican-plugins/tree/master/neighbors)
 * [pelican-toc](https://github.com/ingwinlu/pelican-toc) I just made some changes here, but haven't proposed them to its developer yet
+* [minification](https://pypi.org/project/pelican-minification/) 
 
 ## Pelicanconf
 
@@ -51,18 +52,24 @@ GTM_BODY = """ """ # Google tag manager script for the body section
 TRACKING = """ """ # I use this section to install custom tracking service like Google Analytics or other tools (fathom, plausible, goat analytics etc)
 ```
 ### Schema structured data section
-Added up to four schema company. Use as much as you need
+I just give a one key example, but use as much keys as you need
 ```bash
+SCHEMA_WORKFOR = {
+    "your company name": {
+        "company url"
+        } # add comma and continue adding key/values if needed
+}
+SCHEMA_ALUMNIOF = {
+    "education organization name": {
+        "education organization url"
+        } # add comma and continue adding key/values if needed
+}
 SCHEMA_JOB = "" # your job title
 SCHEMA_PERSONAL_DESCRIPTION = "" # your personal description
-SCHEMA_COMPANY = "" # company name
-SCHEMA_COMPANY_LINK = "" # company url
-SCHEMA_COMPANY_2 = ""
-SCHEMA_COMPANY_LINK_2 = ""
-SCHEMA_COMPANY_3 = ""
-SCHEMA_COMPANY_LINK_3 = ""
-SCHEMA_COMPANY_4 = ""
-SCHEMA_COMPANY_LINK_4 = ""
+
+SCHEMA_LINK_SAMEAS = {
+    ('', ''), # name and link of your same as (ex. "linkedin", "https://linkedin.com/myprofile"). Add comma and continue adding key/values if needed
+}
 ```
 ### Various
 ```bash
@@ -112,13 +119,14 @@ UTMBUILDER_SAVE_AS = 'utmbuilder/index.html'
 ERROR_URL = '404/'
 ERROR_SAVE_AS = '404/index.html'
 
-# used in home, as links for my google certifications. 
+# used in about page, as links for my google certifications. 
+CERTIFICATION = True # set False to not show any certifaction logo
 GA_CERT = ''
 GADS_DISPLAY_CERT = ''
 GADS_SEARCH_CERT = ''
 
 AUTHORS = {
-    '[author name here]': { # put the name of the author. I made this template as a single author blog, so this is your name
+    'author name here': { # put the name of the author. I made this template as a single author blog, so this is your name
         'short_description': """""", # used for the author info card inside at the bottom of the articles
         'description': """ """, # used inside the about page, immediately below the authore picture
         'long_description': """ """, #this is the long description placed inside the author about page
@@ -135,12 +143,12 @@ AUTHORS = {
 ```
 ### Categories
 ```bash
-# here you can set you categories. Putting new items inside the dictionary will create new categories pages. Categories can also be projects, they act the same way as blog listing about a single topic, it is just a way to see them.
+# here you can set you categories. Putting new items inside the dictionary will create new categories pages. Categories can also talks about projects, they act the same way as blog listing about a single topic, it is just a way to see them.
 CATEGORIES = {
-    '': { # category name #1
-        'description': "", # description of the category, used both for meta description and as a category main description, if no "project_description" is defined
+    'blog': { # this is the main category, a kind of blog home. Give it the name you like, I call it "blog". 
+        'description': "", # description of the blog, used both for meta description and as a category main description, if no "project_description" is defined
     },
-    '': { # category name #2
+    '': { # here you can specify a real category name
         'description': '',
         'logo_jpg': '/theme/img/cat/name.jpg', # "name" must be the name of the category
         'logo_webp': '/theme/img/cat/name.webp', # "name" must be the name of the category
@@ -156,18 +164,33 @@ CATEGORIES = {
 
 DISPLAY_CATEGORIES_ON_MENU = None
 DISPLAY_PAGES_ON_MENU = None
-# Uncomment following line if you want document-relative URLs when developing
-RELATIVE_URLS = True
+RELATIVE_URLS = True # Uncomment following line if you want document-relative URLs when developing
 LOAD_CONTENT_CACHE = False
 CACHE_CONTENT = False
-# AUTORELOAD_IGNORE_CACHE = True
-
-PLUGIN_PATHS = ['plugin']
-PLUGINS = ['readtime', 'sitemap', 'cover_resizer', 'neighbors', 'pelican-toc'] # theese plugins are needed for the template to corret working. No tested without them
 ```
-
+### Project section
+```bash
+# Usefull for the author page. These information are used to create the project slider
+PROJECTS = {
+    '': { # here the name of the project
+        'image_jpg':'', # just the name of the project main image, jpg file
+        'image_webp':'', # just the name of the project main image, webp file
+        'alt_tag':'', # alt tag for the project image inside the slider
+        'description':"""""" # description of the project. It will appear under the slider image
+    }
+}
+```
 ### Plugin settings
 ```bash
+PLUGIN_PATHS = ['plugin']
+PLUGINS = ['readtime', 'sitemap', 'cover_resizer', 'neighbors', 'pelican-toc', 'minification'] # theese plugins are needed for the template to corret working. No tested without them
+
+MINIFY = {
+  'remove_comments': True,
+  'remove_all_empty_space': True,
+  'remove_optional_attribute_quotes': False
+}
+
 SITEMAP = {
     "format": "xml",
     "priorities": {
@@ -184,7 +207,7 @@ SITEMAP = {
 }
 
 TOC = {
-    'TOC_INCLUDE_TITLE': 'false',     # If 'true' include title in toc
+    'TOC_INCLUDE_TITLE': 'false'
 }
 ```
 
