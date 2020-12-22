@@ -131,9 +131,9 @@ AUTHORS = {
         'description': """ """, # used inside the about page, immediately below the authore picture
         'long_description': """ """, #this is the long description placed inside the author about page
         'url': '/chi-sono/',
-        'image_jpg': '/theme/img/autore/your-name.jpg',
-        'image_webp': '/theme/img/autore/your-name.webp',
-        'image_schema': '/theme/img/autore/your-name.jpg',
+        'image_jpg': '/theme/img/autore/your-name.jpg', # used as author avatar
+        'image_webp': '/theme/img/autore/your-name.webp', # used as author avatar
+        'image_schema': '/theme/img/autore/your-name.jpg', # used for structured data
         'links': (('email', 'mailto:example@mail.com'),
                   ('linkedin', ''),
                   ('twitter', ''),
@@ -211,6 +211,8 @@ TOC = {
 }
 ```
 
+
+
 ## Publishconf
 
 ### General
@@ -223,3 +225,187 @@ FEED_ALL_RSS = 'feeds/all.rss.xml'
 DELETE_OUTPUT_DIRECTORY = True
 GTM = False # set True if want to install Google tag manager
 ```
+
+
+
+## PWA
+
+### Manifest
+```bash
+{
+    "manifest_version": 1,
+    "version": "1.0.0",
+    "short_name": "", # the name of your website here
+    "name": "", # the name of your website here
+    "description": "", # the description of your website here
+    "icons": [
+        {
+        "src": "theme/img/pwa512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+        },
+        {
+        "src": "theme/img/maskable_icon.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+        },
+        {
+        "src": "theme/img/pwa144.png",
+        "sizes": "144x144",
+        "type": "image/png"
+        }
+    ],
+    "start_url": "/?utm_source=pwa&utm_medium=app", 
+    "lang": "it-IT",
+    "background_color": "#353e47",
+    "theme_color": "#353e47",
+    "display": "standalone",
+    "orientation": "portrait-primary"
+    }
+```
+
+### Service worker
+```bash
+/*
+ Copyright 2016 Google Inc. All Rights Reserved.
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ http://www.apache.org/licenses/LICENSE-2.0
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+// Names of the two caches used in this version of the service worker.
+// Change to v2, etc. when you update any of the local resources, which will
+// in turn trigger the install event again.
+const PRECACHE = 'precache-v1';
+const RUNTIME = 'runtime';
+
+// A list of local resources we always want to be cached.
+const PRECACHE_URLS = [
+  'index.html',
+  './', // Alias for index.html
+  '/theme/css/main.css',
+];
+
+// The install handler takes care of precaching the resources we always need.
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(PRECACHE)
+      .then(cache => cache.addAll(PRECACHE_URLS))
+      .then(self.skipWaiting())
+  );
+});
+
+// The activate handler takes care of cleaning up old caches.
+self.addEventListener('activate', event => {
+  const currentCaches = [PRECACHE, RUNTIME];
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
+    }).then(cachesToDelete => {
+      return Promise.all(cachesToDelete.map(cacheToDelete => {
+        return caches.delete(cacheToDelete);
+      }));
+    }).then(() => self.clients.claim())
+  );
+});
+
+// The fetch handler serves responses for same-origin resources from a cache.
+// If no response is found, it populates the runtime cache with the response
+// from the network before returning it to the page.
+self.addEventListener('fetch', event => {
+  // Skip cross-origin requests, like those for Google Analytics.
+  if (event.request.url.startsWith(self.location.origin)) {
+    event.respondWith(
+      caches.match(event.request).then(cachedResponse => {
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+
+        return caches.open(RUNTIME).then(cache => {
+          return fetch(event.request).then(response => {
+            // Put a copy of the response in the runtime cache.
+            return cache.put(event.request, response.clone()).then(() => {
+              return response;
+            });
+          });
+        });
+      })
+    );
+  }
+});
+```
+
+
+
+## Filo to provide
+```bash
+author pics under "/static/img/autore" folder
+cat pics under "/static/img/cat" folder
+projects pics under "/static/img/progetti"
+favicon under "/static/img/" folder
+    favicon.ico
+    favicon57.ico
+    favicon72.ico
+    favicon114.ico
+    maskable_icon.png
+    pwa144.png
+    pwa512.png
+```
+
+
+
+## How create new content
+I like writing content using html. I created the "new-html.py" file in order to facilitate myself creating new content. Run it in this way
+```bash
+python new-html.py slug-of-the-post category
+ex.
+python new-html.py hello-world-this-is-my-first-post coding
+```
+The script will create a new html file called as the slug provided. Inside the file, you will find several meta tags, some of them already filled
+```bash
+    <head>
+        <title></title> # here there will be the slug too, change it with the title of the article (add stopwords..)
+        <meta name="summary" content="" /> # add the summary used inside the blog listing pages
+        <meta name="seo_desc" content="" /> # add meta description for google
+        <meta name="date" content="" /> # automatic
+        <meta name="tags" content="" /> # leave blank
+        <meta name="category" content="" /> # automatic
+        <meta name="slug" content="" /> # automatic
+        <meta name="url" content="" /> # automatic
+        <meta name="cover_jpg" content="" /> # automatic
+        <meta name="cover_webp" content="" /> # automatic
+        <meta name="cover_d1_jpg" content="" /> # automatic
+        <meta name="cover_d1_webp" content="" /> # automatic
+        <meta name="cover_d2_jpg" content="" /> # automatic
+        <meta name="cover_d2_webp" content="" /> # automatic
+        <meta name="cover1x1" content="" /> # automatic
+        <meta name="cover4x3" content="" /> # automatic
+        <meta name="cover16x9" content="" /> # automatic
+        <meta name="thumb_jpg" content="" /> # automatic
+        <meta name="thumb_webp" content="" /> # automatic
+        <meta name="cat_webp" content="" /> # automatic
+        <meta name="cat_jpg" content="" /> # automatic
+        <meta name="alt" content="" /> # add tje alt tag for the hero image and the thumb of the article
+        <meta name="authors" content="" /> # add your name. It must be the same setted inside AUTHORS dict on peliconf.py
+    </head>
+```
+The script will also create two folder called as the slug provided:
+* the first under "/content" where you will must put the main image of the article, used for hero images and thums
+* the second under "/theme/static/img/" where will be placed all the adaptation of the main image (see the next section about the "cover_resizer" plugin). I also use this folder to put in images and/or video that I refer to inside the article.
+
+
+
+## Custom plugin
+I created a plugin called "cover_resizer", I consider it still in beta. Looping for all the content provided, it takes a jpg image and generates from it all the adaptation:
+* webp
+* thumbs
+* different sizes (usefull for article rich snippet).
+
+To make it works, you have to put the main image of an article under the "/content/your-article/ folder and name it "cover_raw.jpg".
+During the output generation process, or starting the local server, this script will process the main image and create the adaptations. After that will rename the main image removing the "_raw" suffix
