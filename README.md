@@ -42,6 +42,7 @@ Table of content:
 * [How create new content](#how-create-new-content)
 * [Custom plugin](#custom-plugin)
 
+
 ## Pelicanconf
 Here I explain the configuration of the "pelicaconf.py" and the "publishconf.py" files
 
@@ -150,11 +151,16 @@ UTMBUILDER_SAVE_AS = 'utmbuilder/index.html'
 ERROR_URL = '404/'
 ERROR_SAVE_AS = '404/index.html'
 
-# used in about page, as links for my google certifications. 
+# used in about page, as links for personal certifications. 
 CERTIFICATION = True # set False to not show any certifaction logo
-GA_CERT = ''
-GADS_DISPLAY_CERT = ''
-GADS_SEARCH_CERT = ''
+CERTIFICATIONS = { # add as many you need
+    '': {
+        'url': '',
+        'title': '',
+        'img': '',
+        'alt_tag': ''
+    }
+}
 
 AUTHORS = {
     'author name here': { # put the name of the author. I made this template as a single author blog, so this is your name
