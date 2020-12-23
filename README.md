@@ -1,25 +1,20 @@
-Table of content:
-- [pelican-dtheme](#pelican-dtheme)
-  * [Pelicanconf](#pelicanconf)
-    + [General section](#general-section)
-    + [Tracking section](#tracking-section)
-    + [Schema structured data section](#schema-structured-data-section)
-    + [Various](#various)
-    + [Categories](#categories)
-    + [Project section](#project-section)
-    + [Plugin settings](#plugin-settings)
-  * [Publishconf](#publishconf)
-    + [General](#general)
-  * [PWA](#pwa)
-    + [Manifest](#manifest)
-  * [Filo to provide](#filo-to-provide)
-  * [How create new content](#how-create-new-content)
-  * [Custom plugin](#custom-plugin)
-
 # pelican-dtheme
 
-DTeheme is a theme developed for Pelican. The goal is to create a theme that allows people to generate a fast website, lightweight and attentive to the metrics of web vitals.
-This is not a documentation, but it is the closest thing to documentation that I can do right now. I hope it will be useful.
+DTheme is a theme developed for Pelican. The goal is to create a theme that allows people to generate a fast website, lightweight, attentive to the metrics of web vitals and SEO oriented. Here some of the features:
+* native lazy load
+* images optimizations for [web vitals](https://web.dev/vitals/)
+* SEO onpage
+  + canonical tag
+  + structured data (specific for articles and person)
+  + other meta tags automatically populated based on the information provided inside each article tags (see the [How create new content](#how-create-new-content) section)
+* preload and prefetch sources for a better experience
+* dark and light theme
+* native fonts (no external font sources, for a faster and lighter experience)
+* related articles (thanks to the "neighbors" plugin. Here the theme shows articles categorized with the same category of the main article)
+* Google Tag Manager ready, with the possibility of adding custom tracking inside the head tag
+
+
+This is not a documentation, but it is the closest thing to a documentation that I can do right now. I hope it will be useful.
 [Here](https://www.dariotordoni.it) you can find my personal website where I use, at the time of writing, this theme.
 
 Some plugins are needed in order for the theme to work:
@@ -30,6 +25,22 @@ Some plugins are needed in order for the theme to work:
 * [pelican-toc](https://github.com/ingwinlu/pelican-toc) I just made some changes here, but haven't proposed them to its developer yet
 * [minification](https://pypi.org/project/pelican-minification/) 
 
+Table of content:
+* [Pelicanconf](#pelicanconf)
+  + [General section](#general-section)
+  + [Tracking section](#tracking-section)
+  + [Schema structured data section](#schema-structured-data-section)
+  + [Various](#various)
+  + [Categories](#categories)
+  + [Project section](#project-section)
+  + [Plugin settings](#plugin-settings)
+* [Publishconf](#publishconf)
+  + [General](#general)
+* [PWA](#pwa)
+  + [Manifest](#manifest)
+* [Filo to provide](#filo-to-provide)
+* [How create new content](#how-create-new-content)
+* [Custom plugin](#custom-plugin)
 
 ## Pelicanconf
 Here I explain the configuration of the "pelicaconf.py" and the "publishconf.py" files
@@ -363,7 +374,9 @@ I created a plugin called "cover_resizer", I consider it still in beta. Looping 
 * different sizes (usefull for article rich snippet).
 
 This plugin is not intented to be used on other templates, as I hardcoded several information strictly related to my theme.
+
 To make it works, you have to put the main image of an article under the "/content/your-article/ folder and name it "cover_raw.jpg". I use a jpg file, 1024*576.
 During the output generation process, or starting the local server, this script will process the main image and create the adaptations. After that will rename the main image removing the "_raw" suffix.
+
 The plugin will put all the adaptation inside the "/theme/img/slug-of-your-article/" folder already created by the "new-html.py" file.
 If you don't use the "new-html.py" script to create new content, you will have to add the folder by yourself.
