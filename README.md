@@ -1,3 +1,21 @@
+Table of content:
+- [pelican-dtheme](#pelican-dtheme)
+  * [Pelicanconf](#pelicanconf)
+    + [General section](#general-section)
+    + [Tracking section](#tracking-section)
+    + [Schema structured data section](#schema-structured-data-section)
+    + [Various](#various)
+    + [Categories](#categories)
+    + [Project section](#project-section)
+    + [Plugin settings](#plugin-settings)
+  * [Publishconf](#publishconf)
+    + [General](#general)
+  * [PWA](#pwa)
+    + [Manifest](#manifest)
+  * [Filo to provide](#filo-to-provide)
+  * [How create new content](#how-create-new-content)
+  * [Custom plugin](#custom-plugin)
+
 # pelican-dtheme
 
 DTeheme is a theme developed for Pelican. The goal is to create a theme that allows people to generate a fast website, lightweight and attentive to the metrics of web vitals.
@@ -12,7 +30,9 @@ Some plugins are needed in order for the theme to work:
 * [pelican-toc](https://github.com/ingwinlu/pelican-toc) I just made some changes here, but haven't proposed them to its developer yet
 * [minification](https://pypi.org/project/pelican-minification/) 
 
+
 ## Pelicanconf
+Here I explain the configuration of the "pelicaconf.py" and the "publishconf.py" files
 
 ### General section
 ```bash
@@ -32,7 +52,7 @@ PATH = 'content'
 STATIC_PATHS = ['extra']
 MENUITEMS = (('BLOG', '/blog/'),('ABOUT', '/chi-sono/'),) # the template is made for a two menu items, blog and about page. In this way I can manage the menu without using a hamburger menu and without using a javascript. Also, I don't need more than two menu items right one. At the moment there is a misconfiguration and this settings field is also in publishconf.py file, better to use the one in the publishconf.
 
-EXTRA_PATH_METADATA = { # use extra_path_metadata for static file needed in the root path, examples:
+EXTRA_PATH_METADATA = { # use extra_path_metadata for static file needed in the root path. Remove the ones you don't need. Examples:
     'extra/robots.txt': {'path': 'robots.txt'},
     'extra/sw.js': {'path': 'sw.js'},
     'extra/manifest.json': {'path': 'manifest.json'},
@@ -183,14 +203,16 @@ PROJECTS = {
 ### Plugin settings
 ```bash
 PLUGIN_PATHS = ['plugin']
-PLUGINS = ['readtime', 'sitemap', 'cover_resizer', 'neighbors', 'pelican-toc', 'minification'] # theese plugins are needed for the template to corret working. No tested without them
+PLUGINS = ['readtime', 'sitemap', 'cover_resizer', 'neighbors', 'pelican-toc', 'minification'] # some of theese plugins are needed for the template to corret working. Not tested without them.
 
+# configuration for "minification" plugin. Not needed but usefull to reduce the size of the files.
 MINIFY = {
   'remove_comments': True,
   'remove_all_empty_space': True,
   'remove_optional_attribute_quotes': False
 }
 
+# configuration for "sitemap" plugin. Not needed but usefull for seo purposes; assign for each key, the value you prefer.
 SITEMAP = {
     "format": "xml",
     "priorities": {
@@ -206,6 +228,7 @@ SITEMAP = {
     'exclude': ['tag/', 'category/']
 }
 
+# configuration for the "pelican-toc" plugin. The theme should work without the plugin, but I recommend it. I just made some changes to the original plugin, but haven't proposed them to its developer yet.
 TOC = {
     'TOC_INCLUDE_TITLE': 'false'
 }
@@ -229,6 +252,7 @@ GTM = False # set True if want to install Google tag manager
 
 
 ## PWA
+Here the file you need to edit for the pwa. There is also a "sw.js" service worker, but I think you could leave it as it is.
 
 ### Manifest
 ```bash
@@ -268,18 +292,25 @@ GTM = False # set True if want to install Google tag manager
 
 
 ## Filo to provide
+I removed some files from the theme, you need to provide them by yourself
 ```bash
 author pics under "/static/img/autore" folder
 cat pics under "/static/img/cat" folder
 projects pics under "/static/img/progetti"
 favicon under "/static/img/" folder
-    favicon.ico
+    favicon.ico # this one should not be necessary anymore
     favicon57.ico
     favicon72.ico
     favicon114.ico
     maskable_icon.png
     pwa144.png
     pwa512.png
+favicon under "/content/extra/" folder
+    favicon.ico
+robots.txt under "/content/extra/" folder # if you need it, and you do.
+privacy-policy.pdf under "/content/extra/" folder # the template has no privacy policy link anywhere. Put it where you prefer
+cookie-policy.pdf under "/content/extra/" folder # the template has no privacy policy link anywhere. Put it where you prefer
+.htaccess under "/content/extra/" folder
 ```
 
 
@@ -331,5 +362,8 @@ I created a plugin called "cover_resizer", I consider it still in beta. Looping 
 * thumbs
 * different sizes (usefull for article rich snippet).
 
+This plugin is not intented to be used on other templates, as I hardcoded several information strictly related to my theme.
 To make it works, you have to put the main image of an article under the "/content/your-article/ folder and name it "cover_raw.jpg".
-During the output generation process, or starting the local server, this script will process the main image and create the adaptations. After that will rename the main image removing the "_raw" suffix
+During the output generation process, or starting the local server, this script will process the main image and create the adaptations. After that will rename the main image removing the "_raw" suffix.
+The plugin will put all the adaptation inside the "/theme/img/slug-of-your-article/" folder already created by the "new-html.py" file.
+If you don't use the "new-html.py" script to create new content, you will have to add the folder by yourself.
