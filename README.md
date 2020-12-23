@@ -363,7 +363,7 @@ I created a plugin called "cover_resizer", I consider it still in beta. Looping 
 * different sizes (usefull for article rich snippet).
 
 This plugin is not intented to be used on other templates, as I hardcoded several information strictly related to my theme.
-To make it works, you have to put the main image of an article under the "/content/your-article/ folder and name it "cover_raw.jpg".
+To make it works, you have to put the main image of an article under the "/content/your-article/ folder and name it "cover_raw.jpg". I use a jpg file, 1024*576.
 During the output generation process, or starting the local server, this script will process the main image and create the adaptations. After that will rename the main image removing the "_raw" suffix.
 The plugin will put all the adaptation inside the "/theme/img/slug-of-your-article/" folder already created by the "new-html.py" file.
 If you don't use the "new-html.py" script to create new content, you will have to add the folder by yourself.
