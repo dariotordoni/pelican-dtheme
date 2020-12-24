@@ -1,0 +1,109 @@
+{% extends "base_article.html" %}
+{% block head %}
+  {{ super() }}
+  {% if article.description %}
+    <meta name="description" content="{{article.description}}" />
+  {% endif %}
+
+  {% for tag in article.tags %}
+    <meta name="tag" content="{{ tag }}" />
+  {% endfor %}
+
+  <link rel="preload" as="image" imagesrcset="{{ SITEURL }}{{ article.cover_d1_webp }} 1x, {{ SITEURL }}{{ article.cover_d2_webp }} 2x" imagesizes="700px" href="{{ SITEURL }}{{ article.cover_d1_webp }}">
+  {% if article.prev_article_in_category %}
+  <link rel="prefetch" href="{{ SITEURL }}/blog/{{ article.prev_article_in_category.slug }}/" as="document">
+  {% endif %}
+  {% if article.next_article_in_category %}
+  <link rel="prefetch" href="{{ SITEURL }}/blog/{{ article.next_article_in_category.slug }}/" as="document">
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<section id="article-content" class="nav-spacer">
+  <header>
+    <h1 class="entry-title">{{ article.title }}</h1>
+    <span class="breadcrumb">
+      <a href="{{ SITEURL }}">Home</a> > <a href="{{ SITEURL }}/blog/">blog</a> > <a href="{{ SITEURL }}/cat/{{ category }}/">{{ category }}</a> > <p>{{ article.title }}</p>
+    </span>
+ {% import 'translations.html' as translations with context %}
+ {{ translations.translations_for(article) }}
+  </header>
+  <footer class="post-info">
+    <section>
+    </section>
+  <section>
+    <time datetime="{{ article.date.isoformat() }}">
+      {{ article.locale_date }}
+    </time>
+    {% if article.readtime %}
+    <div>lettura: {{article.readtime.minutes}} min.</div>
+    {% endif %}
+    {% if article.modified %}
+    <time datetime="{{ article.modified.isoformat() }}">
+    </time>
+    {{ article.locale_modified }}
+    {% endif %}
+    <p>categoria: <a href="{{ SITEURL }}/cat/{{ category }}/">{{ article.category }}</a></p>
+    </section>
+  </footer><!-- /.post-info -->
+  <picture>
+    <source
+    srcset="{{ SITEURL }}{{ article.cover_d1_webp }} 1x, {{ SITEURL }}{{ article.cover_d2_webp }} 2x"
+    type="image/webp">
+    <img
+    height="394px"
+    width="700px"
+    loading="eager"
+    alt="{{ article.title }}"
+    src="{{ SITEURL }}{{ article.cover_d1_jpg }}"
+    srcset="{{ SITEURL }}{{ article.cover_d1_jpg }} 1x, {{ SITEURL }}{{ article.cover_d2_jpg }} 2x"
+    type="image/jpeg"/>
+  </picture>
+  {% if article.toc %}
+    {{article.toc}}
+{% endif %}
+  <div class="entry-content">
+    {{ article.content }}
+  </div><!-- /.entry-content -->
+</section>
+{% if article.prev_article_in_category or article.next_article_in_category %}
+  <section id="related">
+      <p>ALTRI ARTICOLI DELLA CATEGORIA</p>
+      <ol class="articles_container">
+        {% include 'article_listing_related.html' %}
+      </ol>
+    </section>
+{% endif %}
+<section id="content-info-box">
+      <span>
+        {% if article.category %}
+        <div class="flex-v-center">
+          <picture>
+            <source type="image/webp" srcset="{{ SITEURL }}{{ article.cat_webp }}">
+              <img loading="lazy" width="50px" height="50px" src="{{ SITEURL }}{{ article.cat_jpg }}" alt="La categoria {{ article.category }}" />
+            </picture>
+            <a href="{{ SITEURL }}/cat/{{ category }}/">{{ article.category }}</a>
+          </div>
+          <p>{{ CATEGORIES.get(category|string).description }}</p>
+        {% endif %}
+      </span>
+  <span>
+    {% if article.authors %}
+    <div>
+      <address class="flex-v-center">
+        {% for author in article.authors %}
+        {% if author|string in AUTHORS %}
+        <picture>
+          <source srcset="{{ SITEURL }}{{ AUTHORS.get(author|string).image_webp }}">
+            <img loading="lazy" width="50px" height="50px" alt="{{ AUTHOR }}" src="{{ SITEURL }}{{ AUTHORS.get(author|string).image_jpg }}"/>
+          </picture>
+          <a rel="author" href="{{ SITEURL }}{{ AUTHORS.get(author|string).url }}">{{ author }}</a>
+        </div>
+          <p>{{ AUTHORS.get(author|string).description }}</p>
+        {% endif %}
+      {% endfor %}
+    </address>
+    {% endif %}
+  </span>
+</section>
+{% endblock %}
