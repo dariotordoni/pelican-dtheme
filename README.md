@@ -29,7 +29,7 @@ DTheme is a theme developed for Pelican. The goal is to create a theme that allo
 Some plugins are needed in order for the theme to work:
 * [readtime](https://github.com/getpelican/pelican-plugins/tree/master/readtime)
 * [sitemap](https://github.com/getpelican/pelican-plugins/tree/master/sitemap)
-* [cover_resizer]()
+* [cover_resizer](https://github.com/dariotordoni/pelican-cover-resizer)
 * [neighbors](https://github.com/getpelican/pelican-plugins/tree/master/neighbors)
 * [pelican-toc](https://github.com/ingwinlu/pelican-toc) I just made some changes here, but haven't proposed them to its developer yet
 * [minification](https://pypi.org/project/pelican-minification/) 
