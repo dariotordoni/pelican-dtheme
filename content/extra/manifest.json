@@ -1,0 +1,31 @@
+{
+    "manifest_version": 1,
+    "version": "1.0.0",
+    "short_name": "",
+    "name": "",
+    "description": "",
+    "icons": [
+        {
+        "src": "theme/img/pwa512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+        },
+        {
+        "src": "theme/img/maskable_icon.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+        },
+        {
+        "src": "theme/img/pwa144.png",
+        "sizes": "144x144",
+        "type": "image/png"
+        }
+    ],
+    "start_url": "/?utm_source=pwa&utm_medium=app", 
+    "lang": "it-IT",
+    "background_color": "#353e47",
+    "theme_color": "#353e47",
+    "display": "standalone",
+    "orientation": "portrait-primary"
+    }
