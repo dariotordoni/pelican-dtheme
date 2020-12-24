@@ -1,8 +1,12 @@
 # pelican-dtheme
 
+This is not a documentation, but it is the closest thing to a documentation that I can do right now. I hope it will be useful.
+[Here](https://www.dariotordoni.it) you can find my personal website where I use, at the time of writing, this theme.
+
 DTheme is a theme developed for Pelican. The goal is to create a theme that allows people to generate a fast website, lightweight, attentive to the metrics of web vitals and SEO oriented. Here some of the features:
 * native lazy load
 * images optimizations for [web vitals](https://web.dev/vitals/)
+* support for webp images
 * SEO onpage
   + canonical tag
   + structured data (specific for articles and person)
@@ -13,9 +17,14 @@ DTheme is a theme developed for Pelican. The goal is to create a theme that allo
 * related articles (thanks to the "neighbors" plugin. Here the theme shows articles categorized with the same category of the main article)
 * Google Tag Manager ready, with the possibility of adding custom tracking inside the head tag
 
-
-This is not a documentation, but it is the closest thing to a documentation that I can do right now. I hope it will be useful.
-[Here](https://www.dariotordoni.it) you can find my personal website where I use, at the time of writing, this theme.
+### known issues:
+* slug or internal links are, sometimes, hardcoded
+* slug or internal links are, sometimes, in italian
+* errors logged in console. This does not make it possible to reach the maximum score on lighthouse audit for every page
+* the progressive web app does not work offline
+* the documentation is not even close to the one I would like to write
+* the theme is lacking of flexibility
+* other issues that I do not remember or I have still not found. If you find them, [contact me](mailto:tordoni.dario@gmail.com)
 
 Some plugins are needed in order for the theme to work:
 * [readtime](https://github.com/getpelican/pelican-plugins/tree/master/readtime)
