@@ -24,6 +24,7 @@ DTheme is a theme developed for Pelican. The goal is to create a theme that allo
 * the progressive web app does not work offline
 * the documentation is not even close to the one I would like to write
 * the theme is lacking of flexibility
+* the theme does not manage images inside the article content yet. There are no classes or automatic styling techniques, but I am planning to write a plugin to do so. Inside my personal website I don't use pics apart from the main one
 * other issues that I do not remember or I have still not found. If you find them, [contact me](mailto:tordoni.dario@gmail.com)
 
 Some plugins are needed in order for the theme to work:
