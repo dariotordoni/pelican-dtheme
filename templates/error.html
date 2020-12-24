@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}
+  {{ super() }}
+  - Pagina non trovata
+{% endblock %}
+{% block content %}
+<section id="error-page">
+    <span>
+        La pagina che cerchi non sembra più disponibile. Prova a cercare altri articoli all'interno della sezione <a href="{{ SITEURL }}/blog/">blog</a>.
+    </span>
+</section>
+{% endblock content %}

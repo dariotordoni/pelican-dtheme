@@ -1,0 +1,35 @@
+<div class="toggle">
+  <input type="checkbox" id="toggle" />
+  <label for="toggle"></label>
+  <span class="sunbeam" id="sb1"></span>
+  <span class="sunbeam" id="sb2"></span>
+  <span class="sunbeam" id="sb3"></span>
+  <span class="sunbeam" id="sb4"></span>
+  <span class="sunbeam" id="sb5"></span>
+  <span class="sunbeam" id="sb6"></span>
+  <span class="sunbeam" id="sb7"></span>
+  <span class="sunbeam" id="sb8"></span>
+</div>
+
+<script>
+  var toggle = document.getElementById("toggle");
+  
+  var storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  if (storedTheme)
+      document.documentElement.setAttribute('data-theme', storedTheme);
+      toggle.setAttribute('data-theme', storedTheme);
+  
+  
+  toggle.onclick = function() {
+      var currentTheme = document.documentElement.getAttribute("data-theme");
+      var targetTheme = "light";
+  
+      if (currentTheme === "light") {
+          targetTheme = "dark";
+      }
+  
+      document.documentElement.setAttribute('data-theme', targetTheme)
+      toggle.setAttribute('data-theme', targetTheme);
+      localStorage.setItem('theme', targetTheme);
+  };
+  </script>

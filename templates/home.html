@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+<link rel="canonical" href="{{ SITEURL }}" />
+{% endblock head %}
+{% block content %}
+<div id="home-container">
+<div class="nav-spacer articles_container">
+    <div id="author-info">
+        <div>
+            <h1 id="name">{{ AUTHOR }}</h1>
+        </div>
+        <div>
+            <h2 id="job">{{ SCHEMA_JOB }}</h2>
+        </div>
+    </div>
+    <div class="author-profile">
+        <picture>
+            <source type="image/webp" srcset="{{ SITEURL }}{{ AUTHORS.get(AUTHOR|string).image_webp }} 80w 80h">
+            <img width="80px" height="80px" src="{{ SITEURL }}{{ AUTHORS.get(AUTHOR|string).image_jpg }}" alt="{{ AUTHOR }}" />
+        </picture>
+        <p class="author-description">
+            {{ AUTHORS.get(AUTHOR|string).description }}
+        </p>
+        <a href="{{ SITEURL }}/blog/">blog</a>
+        <a href="{{ SITEURL }}/chi-sono/">about</a>
+        {% for name, link in AUTHORS.get(AUTHOR|string).links %}
+        <a rel="noopener" href="{{ link }}" target="_blank">{{ name }}</a>
+        {% endfor %}
+    </div>
+</div>
+</div>
+</body>
+{% endblock content %}

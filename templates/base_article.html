@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="{{ DEFAULT_LANG }}">
+    <head>
+        {% block head %}
+        <meta charset="utf-8" />
+        <title>{% block title %}{{ article.title }} - {{ SITENAME }}{% endblock title %}</title>
+        <meta name="Description" content="{{ article.summary }}"/>
+        <link rel="canonical" href="{{ SITEURL }}/blog/{{ article.slug }}/" />
+        <meta property="og:title" content="{{ article.title }} - {{ SITENAME }}"/>
+        <meta property="og:description" content="{{ article.summary }}"/>
+        <meta property="og:url" content="{{ SITEURL }}/blog/{{ article.slug }}/"/>
+        <meta property="og:image" content="{{ SITEURL }}{{ article.cover_jpg }}"/>
+        <meta property="og:site_name" content="{{ SITENAME }}"/>
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="{{ TWITTERNAME }}">
+        <meta name="twitter:title" content="{{ article.title }} - {{ SITENAME }}">
+        <meta name="twitter:description" content="{{ article.summary }}">
+        <meta name="twitter:image" content="{{ article.cover_jpg }}">
+        {% include 'common.html' %}
+        {% include 'pwa.html' %}
+        {% if TRACKING %}
+            {{ TRACKING }}
+        {% endif %}
+        {% if GTM %}
+            {{ GTM_HEAD }}
+        {% endif %}
+        {% include 'structured_data.html' %}
+        {% endblock head %}
+    </head>
+
+    <body>
+        
+        {% if GTM %}
+        {{ GTM_BODY }}
+        {% endif %}
+        <nav>
+            <ul>
+                <li><a href="{{ SITEURL }}">HOME</a></li>
+            </ul>
+            <ul>
+                {% for title, link in MENUITEMS %}
+                <li><a href="{{ link }}">{{ title }}</a></li>
+                {% endfor %}
+                {% if DISPLAY_PAGES_ON_MENU %}
+                {% for p in pages %}
+                <li{% if p == page %} class="active"{% endif %}>
+                    <a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
+                </li>
+                {% endfor %}
+                {% else %}
+                {% if DISPLAY_CATEGORIES_ON_MENU %}
+                {% for cat, null in categories %}
+                <li{% if cat == category %} class="active"{% endif %}>
+                    <a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a>
+                </li>
+                {% endfor %}
+                {% endif %}
+                {% endif %}
+                <li>
+                    {% include 'color_mode_toggle.html' %}
+                </li>
+            </ul>
+        </nav>
+        {% block content %}
+        {% endblock %}
+        <footer id="footer"><a rel="noopener"class="footer-link" href="https://blog.getpelican.com/">Pelican</a> | <a rel="noopener" class="footer-link" href="https://github.com/dariotordoni/pelican-dtheme">DTheme</a>
+        </footer>
+    </body>
+</html>

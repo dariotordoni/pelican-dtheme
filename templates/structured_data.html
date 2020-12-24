@@ -1,0 +1,509 @@
+{% if page_name == 'index' %}
+<!-- HOME PAGE STRUCTURED DATA -->
+<script type='application/ld+json'>
+    {
+        "@context": "http://www.schema.org",
+        "@type": "WebSite",
+        "@id": "{{ SITEURL }}#website",
+        "name": "{{ SITENAME }}",
+        "url": "{{ SITEURL }}",
+        "about": {
+            "@type": "person",
+            "@id": "{{ SITEURL }}#person",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "{{ SITEURL }}/chi-sono/"
+             },
+            "name": "{{ AUTHOR }}",
+            "description": "{{ SCHEMA_PERSONAL_DESCRIPTION }}",
+            "jobTitle": "{{ SCHEMA_JOB }}",
+            "worksFor": [
+                {% for company, links in SCHEMA_WORKFOR.items() %}
+                {
+                "@type": "Organization",
+                "name": "{{ company }}",
+                "sameAs": [
+                {% for link in links %}
+                {% if loop.last %}
+                "{{ link }}"
+                {% else %}
+                "{{ link }}",
+                {% endif %}
+                {% endfor %}
+                ]
+                {% if loop.last %}
+                }],
+                {% else %}
+                },
+                {% endif %}
+                {% endfor %}
+            "alumniOf": [
+            {% for education_center, links in SCHEMA_ALUMNIOF.items() %}
+            {
+                "@type": "EducationalOrganization",
+                "name": "{{ education_center }}",
+                "sameAs": [
+                {% for link in links %}
+                {% if loop.last %}
+                "{{ link }}"
+                {% else %}
+                "{{ link }}",
+                {% endif %}
+                {% endfor %}
+                ]
+        {% if loop.last %}
+        }],
+        {% else %}
+        },
+        {% endif %}
+        {% endfor %}
+            "gender": "male",
+            "nationality":"https://www.wikidata.org/wiki/Q38",
+            "url": "{{ SITEURL }}",
+            "sameAs": [
+            {% for sameas_social, sameas_link in SCHEMA_LINK_SAMEAS %}
+            {% if loop.last %}
+            "{{sameas_link}}"
+            {% else %}
+            "{{sameas_link}}",
+            {% endif %}
+            {% endfor %}
+            ],
+            "image": "{{ SITEURL }}{{ AUTHORS[AUTHOR].image_jpg }}"
+        }
+}
+</script>
+{% elif page_name == 'chi-sono/' %}
+<!-- ABOUT PAGE STRUCTURED DATA -->
+<script type='application/ld+json'>
+    {
+        "@context": "http://www.schema.org",
+        "@type": "person",
+        "@id": "{{ SITEURL }}#person",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ SITEURL }}/chi-sono/"
+         },
+        "name": "{{ AUTHOR }}",
+        "description": "{{ SCHEMA_PERSONAL_DESCRIPTION }}",
+        "jobTitle": "{{ SCHEMA_JOB }}",
+        "worksFor": [
+        {% for company, links in SCHEMA_WORKFOR.items() %}
+        {
+        "@type": "Organization",
+        "name": "{{ company }}",
+        "sameAs": [
+        {% for link in links %}
+        {% if loop.last %}
+        "{{ link }}"
+        {% else %}
+        "{{ link }}",
+        {% endif %}
+        {% endfor %}
+        ]
+        {% if loop.last %}
+        }],
+        {% else %}
+        },
+        {% endif %}
+        {% endfor %}
+        "alumniOf": [
+            {% for education_center, links in SCHEMA_ALUMNIOF.items() %}
+            {
+                "@type": "EducationalOrganization",
+                "name": "{{ education_center }}",
+                "sameAs": [
+                {% for link in links %}
+                {% if loop.last %}
+                "{{ link }}"
+                {% else %}
+                "{{ link }}",
+                {% endif %}
+                {% endfor %}
+                ]
+        {% if loop.last %}
+        }],
+        {% else %}
+        },
+        {% endif %}
+        {% endfor %}
+        "gender": "male",
+        "nationality":"https://www.wikidata.org/wiki/Q38",
+        "url": "{{ SITEURL }}",
+        "sameAs": [
+        {% for sameas_social, sameas_link in SCHEMA_LINK_SAMEAS %}
+        {% if loop.last %}
+        "{{sameas_link}}"
+        {% else %}
+        "{{sameas_link}}",
+        {% endif %}
+        {% endfor %}
+        ],
+        "image": "{{ SITEURL }}{{ AUTHORS[AUTHOR].image_jpg }}"
+    }
+}
+</script>
+{% elif page_name == "utmbuilder/index" %}
+<!-- APP UTMBUILDER STRUCTURED DATA -->
+<script type='application/ld+json'>
+    {
+        "@context": "http://www.schema.org",
+        "@type": "SoftwareApplication",
+        "@id": "{{ SITEURL }}/{{ UTMBUILDER_URL }}#appUtmbuilder",
+        "applicationCategory": "Digital Analytics",
+        "about": "Web app per la creazione di link tracciati UTM utili ai fini di web e digital analytics." ,
+        "name": "Generatore UTM",
+        "url": "{{ SITEURL }}/{{ UTMBUILDER_URL }}",
+        "author": {
+            "@type": "person",
+            "@id": "{{ SITEURL }}#person",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "{{ SITEURL }}/chi-sono/"
+             },
+            "name": "{{ AUTHOR }}",
+            "description": "{{ SCHEMA_PERSONAL_DESCRIPTION }}",
+            "jobTitle": "{{ SCHEMA_JOB }}",
+            "worksFor": [
+                {% for company, links in SCHEMA_WORKFOR.items() %}
+                {
+                "@type": "Organization",
+                "name": "{{ company }}",
+                "sameAs": [
+                {% for link in links %}
+                {% if loop.last %}
+                "{{ link }}"
+                {% else %}
+                "{{ link }}",
+                {% endif %}
+                {% endfor %}
+                ]
+                {% if loop.last %}
+                }],
+                {% else %}
+                },
+                {% endif %}
+                {% endfor %}
+            "alumniOf": [
+            {% for education_center, links in SCHEMA_ALUMNIOF.items() %}
+            {
+                "@type": "EducationalOrganization",
+                "name": "{{ education_center }}",
+                "sameAs": [
+                {% for link in links %}
+                {% if loop.last %}
+                "{{ link }}"
+                {% else %}
+                "{{ link }}",
+                {% endif %}
+                {% endfor %}
+                ]
+        {% if loop.last %}
+        }],
+        {% else %}
+        },
+        {% endif %}
+        {% endfor %}
+            "gender": "male",
+            "nationality":"https://www.wikidata.org/wiki/Q38",
+            "url": "{{ SITEURL }}",
+            "sameAs": [
+            {% for sameas_social, sameas_link in SCHEMA_LINK_SAMEAS %}
+            {% if loop.last %}
+            "{{sameas_link}}"
+            {% else %}
+            "{{sameas_link}}",
+            {% endif %}
+            {% endfor %}
+            ],
+            "image": "{{ SITEURL }}{{ AUTHORS[AUTHOR].image_jpg }}"
+        }
+}
+</script>
+{% elif page_name == "blog/index" %}
+<!-- BLOG LISTING STRUCTURED DATA -->
+<script type='application/ld+json'>
+    {
+        "@context": "http://www.schema.org",
+        "@type": "Blog",
+        "mainEntityOfPage":{
+            "@type":"WebPage",
+            "@id":"{{ SITEURL }}/blog/"
+            },
+        "name": "{{ SITENAME }}",
+        "about": "{{ CATEGORIES["blog"].description }}",
+        "author": {
+            "@type": "Person",
+            "@id": "{{ SITEURL }}#person",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "{{ SITEURL }}/chi-sono/"
+             },
+            "name": "{{ AUTHOR }}",
+            "description": "{{ SCHEMA_PERSONAL_DESCRIPTION }}",
+            "jobTitle": "{{ SCHEMA_JOB }}",
+            "worksFor": [
+                {% for company, links in SCHEMA_WORKFOR.items() %}
+                {
+                "@type": "Organization",
+                "name": "{{ company }}",
+                "sameAs": [
+                {% for link in links %}
+                {% if loop.last %}
+                "{{ link }}"
+                {% else %}
+                "{{ link }}",
+                {% endif %}
+                {% endfor %}
+                ]
+                {% if loop.last %}
+                }],
+                {% else %}
+                },
+                {% endif %}
+                {% endfor %}
+            "alumniOf": [
+            {% for education_center, links in SCHEMA_ALUMNIOF.items() %}
+            {
+                "@type": "EducationalOrganization",
+                "name": "{{ education_center }}",
+                "sameAs": [
+                {% for link in links %}
+                {% if loop.last %}
+                "{{ link }}"
+                {% else %}
+                "{{ link }}",
+                {% endif %}
+                {% endfor %}
+                ]
+        {% if loop.last %}
+        }],
+        {% else %}
+        },
+        {% endif %}
+        {% endfor %}
+            "gender": "male",
+            "nationality":"https://www.wikidata.org/wiki/Q38",
+            "url": "{{ SITEURL }}",
+            "sameAs": [
+            {% for sameas_social, sameas_link in SCHEMA_LINK_SAMEAS %}
+            {% if loop.last %}
+            "{{sameas_link}}"
+            {% else %}
+            "{{sameas_link}}",
+            {% endif %}
+            {% endfor %}
+            ],
+            "image": "{{ SITEURL }}{{ AUTHORS[AUTHOR].image_jpg }}"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "{{ AUTHOR }}"
+        }
+}
+</script>
+{% elif "cat/" in page_name %}
+<!-- CATEGORY PAGE STRUCTURED DATA -->
+<script type='application/ld+json'>
+    {
+        "@context": "http://www.schema.org",
+        "@type": "Blog",
+        "additionalType": "Category",
+        "mainEntityOfPage":{
+            "@type":"WebPage",
+            "@id":"{{ SITEURL }}/{{ page_name }}"
+            },
+        "name": "{{ category }}",
+        "about": "{{ CATEGORIES[category].description }}",
+        "author": {
+            "@type": "Person",
+            "@id": "{{ SITEURL }}#person",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "{{ SITEURL }}/chi-sono/"
+             },
+            "name": "{{ AUTHOR }}",
+            "description": "{{ SCHEMA_PERSONAL_DESCRIPTION }}",
+            "jobTitle": "{{ SCHEMA_JOB }}",
+            "worksFor": [
+                {% for company, links in SCHEMA_WORKFOR.items() %}
+                {
+                "@type": "Organization",
+                "name": "{{ company }}",
+                "sameAs": [
+                {% for link in links %}
+                {% if loop.last %}
+                "{{ link }}"
+                {% else %}
+                "{{ link }}",
+                {% endif %}
+                {% endfor %}
+                ]
+                {% if loop.last %}
+                }],
+                {% else %}
+                },
+                {% endif %}
+                {% endfor %}
+            "alumniOf": [
+            {% for education_center, links in SCHEMA_ALUMNIOF.items() %}
+            {
+                "@type": "EducationalOrganization",
+                "name": "{{ education_center }}",
+                "sameAs": [
+                {% for link in links %}
+                {% if loop.last %}
+                "{{ link }}"
+                {% else %}
+                "{{ link }}",
+                {% endif %}
+                {% endfor %}
+                ]
+        {% if loop.last %}
+        }],
+        {% else %}
+        },
+        {% endif %}
+        {% endfor %}
+            "gender": "male",
+            "nationality":"https://www.wikidata.org/wiki/Q38",
+            "url": "{{ SITEURL }}",
+            "sameAs": [
+            {% for sameas_social, sameas_link in SCHEMA_LINK_SAMEAS %}
+            {% if loop.last %}
+            "{{sameas_link}}"
+            {% else %}
+            "{{sameas_link}}",
+            {% endif %}
+            {% endfor %}
+            ],
+            "image": "{{ SITEURL }}{{ AUTHORS[AUTHOR].image_jpg }}"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "{{ AUTHOR }}"
+        }
+}
+</script>
+{% elif ("blog/" in output_file) and ("blog/index" not in output_file) %}
+<!-- BLOG POST STRUCTURED DATA -->
+<script type='application/ld+json'>
+    {
+        "@context": "http://www.schema.org",
+        "@type": "BlogPosting",
+        "mainEntityOfPage":{
+            "@type":"WebPage",
+            "@id":"{{ SITEURL }}/blog/{{ article.slug }}/"
+            },
+        "headline": "{{ article.title }}",
+        "name": "{{ article.title }}",
+        "datePublished": "{{ article.date }}",
+        "dateModified": "{{ article.date }}",
+        "author": {
+            "@type": "Person",
+            "@id": "{{ SITEURL }}#person",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "{{ SITEURL }}/chi-sono/"
+             },
+            "name": "{{ AUTHOR }}",
+            "description": "{{ SCHEMA_PERSONAL_DESCRIPTION }}",
+            "jobTitle": "{{ SCHEMA_JOB }}",
+            "worksFor": [
+                {% for company, links in SCHEMA_WORKFOR.items() %}
+                {
+                "@type": "Organization",
+                "name": "{{ company }}",
+                "sameAs": [
+                {% for link in links %}
+                {% if loop.last %}
+                "{{ link }}"
+                {% else %}
+                "{{ link }}",
+                {% endif %}
+                {% endfor %}
+                ]
+                {% if loop.last %}
+                }],
+                {% else %}
+                },
+                {% endif %}
+                {% endfor %}
+            "alumniOf": [
+            {% for education_center, links in SCHEMA_ALUMNIOF.items() %}
+            {
+                "@type": "EducationalOrganization",
+                "name": "{{ education_center }}",
+                "sameAs": [
+                {% for link in links %}
+                {% if loop.last %}
+                "{{ link }}"
+                {% else %}
+                "{{ link }}",
+                {% endif %}
+                {% endfor %}
+                ]
+        {% if loop.last %}
+        }],
+        {% else %}
+        },
+        {% endif %}
+        {% endfor %}
+            "gender": "male",
+            "nationality":"https://www.wikidata.org/wiki/Q38",
+            "url": "{{ SITEURL }}",
+            "sameAs": [
+            {% for sameas_social, sameas_link in SCHEMA_LINK_SAMEAS %}
+            {% if loop.last %}
+            "{{sameas_link}}"
+            {% else %}
+            "{{sameas_link}}",
+            {% endif %}
+            {% endfor %}
+            ],
+            "image": "{{ SITEURL }}{{ AUTHORS[AUTHOR].image_jpg }}"
+        },
+            "publisher": {
+                "@type": "Organization",
+                "name": "{{ AUTHOR }}",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "{{ SITEURL }}{{ AUTHORS[AUTHOR].image_jpg }}"
+                  }},          
+        "image": [
+        "{{ article.cover1x1 }}",
+        "{{ article.cover4x3 }}",
+        "{{ article.cover16x9 }}"
+        ],
+        "description": "{{ article.summary }}"
+}
+</script>
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ SITEURL }}"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "{{ SITEURL }}/blog/"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{{ category }}",
+        "item": "{{ SITEURL }}/cat/{{ category }}/"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{{ article.title }}",
+        "item": "{{ SITEURL }}/blog/{{ article.slug }}/"
+      }]
+    }
+</script>
+{% else %}
+{% endif %}

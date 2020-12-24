@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% if articles_page.has_other_pages() %}
+{% block head %}
+    {{ super() }}
+    {% if category %}
+      <link rel="canonical" href="{{ SITEURL }}/cat/{{ category }}/" />
+      <meta property="og:url" content="{{ SITEURL }}/cat/{{ category }}/"/>
+    {% elif articles_page.url == 'blog/index.html' %}
+    <link rel="canonical" href="{{ SITEURL }}/blog/" />
+    <meta property="og:url" content="{{ SITEURL }}/blog/"/>
+    {% else %}
+    <link rel="canonical" href="{{ SITEURL }}/{{ articles_page.url }}" />
+    <meta property="og:url" content="{{ SITEURL }}/{{ articles_page.url }}"/>
+    {% endif %}
+    {% if articles_page.has_previous() %}
+        {% if articles_previous_page.url == 'blog/index.html' %}
+        <link rel="prev" href="{{ SITEURL }}/blog/">
+        {% else %}
+        <link rel="prev" href="{{ SITEURL }}/{{ articles_previous_page.url }}">
+        {% endif %}
+        {% if articles_page.has_next() %}
+        <link rel="next" href="{{ SITEURL }}/{{ articles_next_page.url }}">
+        {% endif %}
+    {% endif %}
+{% endblock head %}
+{% endif %}
+
+{% block title %}
+{% if category %}
+{{ category }} - {{ SITENAME }}
+{% elif articles_page.url == 'blog/index.html' %}
+Blog - {{ SITENAME }}
+{% elif articles_page.url == 'blog/' %}
+Blog - {{ SITENAME }}
+{% elif articles_page.url == 'mappa-sito/' %}
+Mappa del sito - {{ SITENAME }}
+{% else %}
+Chi sono - {{ SITENAME }}
+{% endif %}
+{% endblock title %}
+
+{% block description %}
+{% if category %}
+{{ CATEGORIES.get(category|string).description }}
+{% elif articles_page.url == 'blog/index.html' %}
+{{ CATEGORIES.get('blog'|string).description }}
+{% elif articles_page.url == 'blog/' %}
+{{ CATEGORIES.get('blog'|string).description }}
+{% elif articles_page.url == 'mappa-sito/' %}
+La mappa html del mio sito.
+{% else %}
+Chi sono - {{ SITENAME }}
+{% endif %}
+{% endblock description %}
+
+{% block description2 %}
+{% if category %}
+{{ CATEGORIES.get(category|string).description }}
+{% elif articles_page.url == 'blog/index.html' %}
+{{ CATEGORIES.get('blog'|string).description }}
+{% elif articles_page.url == 'blog/' %}
+{{ CATEGORIES.get('blog'|string).description }}
+{% elif articles_page.url == 'mappa-sito/' %}
+La mappa html del mio sito.
+{% else %}
+Chi sono - {{ SITENAME }}
+{% endif %}
+{% endblock description2 %}
+
+{% block description3 %}
+{% if category %}
+{{ CATEGORIES.get(category|string).description }}
+{% elif articles_page.url == 'blog/index.html' %}
+{{ CATEGORIES.get('blog'|string).description }}
+{% elif articles_page.url == 'blog/' %}
+{{ CATEGORIES.get('blog'|string).description }}
+{% elif articles_page.url == 'mappa-sito/' %}
+La mappa html del mio sito.
+{% else %}
+Chi sono - {{ SITENAME }}
+{% endif %}
+{% endblock description3 %}
+
+{% block content %}
+        <section class="nav-spacer">
+        {% block content_title %}
+        <section class="blog-listing-title">
+            <h1>Blog</h1>
+            {% if CATEGORIES.get('blog'|string).logo_jpg %}
+            <picture>
+                <source type="image/webp" srcset="{{ CATEGORIES.get('blog'|string).logo_webp }}">
+                <img src="{{ CATEGORIES.get('blog'|string).logo_jpg }}" alt="" />
+            </picture>
+            {% endif %}
+            <p>{{ CATEGORIES.get("blog").description }}</p>
+        </section>
+        {% endblock %}
+            <ol class="articles_container">
+                {% for article in articles_page.object_list %}
+                    {% include 'article_listing.html' %}
+                {% endfor %}
+            </ol>
+            {% if articles_page.has_other_pages() %}
+                {% include 'pagination.html' %}
+            {% endif %}
+        </section>
+{% endblock content %}

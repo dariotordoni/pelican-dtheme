@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="nav-spacer">
+    <h1>Mappa del sito</h1>
+<h2>Articoli</h2>
+<ul>
+{% for article in articles %}
+    <li>
+        <a href="{{ SITEURL }}/blog/{{ article.slug }}/">{{ article.slug }}</a>
+    </li>
+{% endfor %}
+</ul>
+<h2>Pagine</h2>
+<ul>
+    <li>
+        <a href="{{ SITEURL }}">home</a>
+    </li>
+    <li>
+        <a href="{{ SITEURL }}/chi-sono/">chi sono</a>
+    </li>
+    <li>
+        <a href="{{ SITEURL }}/blog/">blog</a>
+    </li>
+</ul>
+<h2>Categorie</h2>
+<ul>
+    {% for category in categories %}
+    <li>
+        <a href="{{ SITEURL }}/cat/{{ category[0] }}/">{{ category[0] }}</a>
+    </li>
+    {% endfor %}
+</ul>
+</section>
+{% endblock %}

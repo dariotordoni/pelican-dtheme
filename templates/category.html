@@ -1,0 +1,37 @@
+{% extends "blog_index.html" %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content_title %}
+<section class="blog-listing-title">
+  <h1>{{ category }}</h1>
+  <picture>
+    <source type="image/webp" srcset="{{ CATEGORIES.get(category|string).logo_webp }}">
+      <img src="{{ CATEGORIES.get(category|string).logo_jpg }}" alt="{{ category }}" />
+    </picture>
+    {% if CATEGORIES.get(category|string).project_info %}
+    <span>
+      {% if CATEGORIES.get(category|string).project_description %}
+      <p>{{ CATEGORIES.get(category|string).project_description }}</p>
+      {% endif %}
+      {% if CATEGORIES.get(category|string).project_tool %}
+      <p><strong>Tool di gestione progetto:</strong> {{ CATEGORIES.get(category|string).project_tool }}</p>
+      {% endif %}
+      {% if CATEGORIES.get(category|string).project_lang %}
+      <p><strong>Linguaggio progetto:</strong> {{ CATEGORIES.get(category|string).project_lang }}</p>
+      {% endif %}
+      {% if CATEGORIES.get(category|string).project_version %}
+      <p><strong>Versione attuale:</strong> {{ CATEGORIES.get(category|string).project_version }}</p>
+      {% endif %}
+      {% if CATEGORIES.get(category|string).project_links %}
+      <p><strong>Link:</strong> {{ CATEGORIES.get(category|string).project_links }}</p>
+      {% endif %}
+      {% if CATEGORIES.get(category|string).project_author %}
+      <p><strong>Autore:</strong> <a href="{{ SITEURL }}/chi-sono/">{{ CATEGORIES.get(category|string).project_author }}</p></a>
+      {% endif %}
+    </span>
+    {% else %}
+    <p>{{ CATEGORIES.get(category|string).description }}</p>
+    {% endif %}
+</section>
+{% endblock %}
