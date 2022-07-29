@@ -5,11 +5,16 @@ TEMPLATE = """
 <html>
     <head>
         <title>{title}</title>
+        <meta name="language" content="{lang}" />
         <meta name="summary" content="" />
         <meta name="seo_desc" content="" />
-        <meta name="date" content="{year}-{month}-{day} {hour}:{minute:02d}" />
-        <meta name="tags" content="" />
+        <!-- <meta name="tags" content="" /> -->
+        <meta name="alt" content="" />
+        <meta name="hreflang_{lang2}" content="" />
+        <meta name="hreflang_{lang}" content="/{slug}/" />
+        <meta name="authors" content="Dario Tordoni" />
         <meta name="category" content="{category}" />
+        <meta name="date" content="{year}-{month}-{day} {hour}:{minute:02d}" />
         <meta name="slug" content="{slug}" />
         <meta name="url" content="blog/{slug}/" />
         <meta name="cover_jpg" content="/theme/img/art-{slug}/copertina.jpg" />
@@ -25,22 +30,26 @@ TEMPLATE = """
         <meta name="thumb_webp" content="/theme/img/art-{slug}/thumb.webp" />
         <meta name="cat_webp" content="/theme/img/cat/{category}.webp" />
         <meta name="cat_jpg" content="/theme/img/cat/{category}.jpg" />
-        <meta name="alt" content="" />
-        <meta name="authors" content="" />
-        <meta name="status" content="draft" />
+        # <meta name="status" content="draft" />
     </head>
     <body>
     </body>
 </html>
 """
 
-def make_entry(title, category):
+def make_entry(lang, title, category):
+    if lang == "it":
+        lang2 = "en"
+    else:
+        lang2 = "it"
     today = datetime.today()
     slug = title.lower().strip().replace(' ', '-')
     f_create = "{}_{:0>2}_{:0>2}_{}.html".format(
         today.year, today.month, today.day, slug)
     title = " ".join(title.split("-"))
     t = TEMPLATE.strip().format(title=title,
+                                lang=lang,
+                                lang2=lang2,
                                 hashes='#' * len(title),
                                 year=today.year,
                                 month=today.month,
@@ -51,16 +60,16 @@ def make_entry(title, category):
                                 category=category,)
     with open(f_create, 'w') as w:
         w.write(t)
-    print("File creato -> " + f_create)
+    print("File created -> " + f_create)
     os.getcwd()
     os.mkdir("art-" + slug)
     os.chdir("../theme/dt/static/img")
     os.mkdir("art-" + slug)
-    print("Cartella creata")
+    print("Folder created")
 
 if __name__ == '__main__':
 
     if len(sys.argv) > 1:
-        make_entry(sys.argv[1],sys.argv[2])
+        make_entry(sys.argv[1],sys.argv[2],sys.argv[3])
     else:
-        print ("Manca il titolo o la categoria")
+        print ("Title or category are missing")

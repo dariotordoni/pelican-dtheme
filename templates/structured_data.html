@@ -12,7 +12,7 @@
             "@id": "{{ SITEURL }}#person",
             "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "{{ SITEURL }}/chi-sono/"
+                "@id": "{{ SITEURL }}/{{ AUTHOR_URL }}"
              },
             "name": "{{ AUTHOR }}",
             "description": "{{ SCHEMA_PERSONAL_DESCRIPTION }}",
@@ -36,6 +36,19 @@
                 {% else %}
                 },
                 {% endif %}
+                {% endfor %}
+            "knowsAbout": [
+                {% for service, links in SCHEMA_KNOWSABOUT %}
+                {
+                    "@type": "Service",
+                    "name": "{{ service }}",
+                    "sameAs": [
+                    "{{ links }}"]
+                    {% if loop.last %}
+                }],
+                    {% else %}
+                },
+                    {% endif %}
                 {% endfor %}
             "alumniOf": [
             {% for education_center, links in SCHEMA_ALUMNIOF.items() %}
@@ -73,7 +86,7 @@
         }
 }
 </script>
-{% elif page_name == 'chi-sono/' %}
+{% elif page_name == 'about/' %}
 <!-- ABOUT PAGE STRUCTURED DATA -->
 <script type='application/ld+json'>
     {
@@ -82,7 +95,7 @@
         "@id": "{{ SITEURL }}#person",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "{{ SITEURL }}/chi-sono/"
+            "@id": "{{ SITEURL }}/{{ AUTHOR_URL }}"
          },
         "name": "{{ AUTHOR }}",
         "description": "{{ SCHEMA_PERSONAL_DESCRIPTION }}",
@@ -106,6 +119,19 @@
         {% else %}
         },
         {% endif %}
+        {% endfor %}
+        "knowsAbout": [
+        {% for service, links in SCHEMA_KNOWSABOUT %}
+        {
+            "@type": "Service",
+            "name": "{{ service }}",
+            "sameAs": [
+            "{{ links }}"]
+            {% if loop.last %}
+        }],
+            {% else %}
+        },
+            {% endif %}
         {% endfor %}
         "alumniOf": [
             {% for education_center, links in SCHEMA_ALUMNIOF.items() %}
@@ -159,7 +185,7 @@
             "@id": "{{ SITEURL }}#person",
             "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "{{ SITEURL }}/chi-sono/"
+                "@id": "{{ SITEURL }}/{{ AUTHOR_URL }}"
              },
             "name": "{{ AUTHOR }}",
             "description": "{{ SCHEMA_PERSONAL_DESCRIPTION }}",
@@ -183,6 +209,19 @@
                 {% else %}
                 },
                 {% endif %}
+                {% endfor %}
+            "knowsAbout": [
+                {% for service, links in SCHEMA_KNOWSABOUT %}
+                {
+                    "@type": "Service",
+                    "name": "{{ service }}",
+                    "sameAs": [
+                    "{{ links }}"]
+                    {% if loop.last %}
+                }],
+                    {% else %}
+                },
+                    {% endif %}
                 {% endfor %}
             "alumniOf": [
             {% for education_center, links in SCHEMA_ALUMNIOF.items() %}
@@ -237,7 +276,7 @@
             "@id": "{{ SITEURL }}#person",
             "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "{{ SITEURL }}/chi-sono/"
+                "@id": "{{ SITEURL }}/{{ AUTHOR_URL }}"
              },
             "name": "{{ AUTHOR }}",
             "description": "{{ SCHEMA_PERSONAL_DESCRIPTION }}",
@@ -261,6 +300,19 @@
                 {% else %}
                 },
                 {% endif %}
+                {% endfor %}
+            "knowsAbout": [
+                {% for service, links in SCHEMA_KNOWSABOUT %}
+                {
+                    "@type": "Service",
+                    "name": "{{ service }}",
+                    "sameAs": [
+                    "{{ links }}"]
+                    {% if loop.last %}
+                }],
+                    {% else %}
+                },
+                    {% endif %}
                 {% endfor %}
             "alumniOf": [
             {% for education_center, links in SCHEMA_ALUMNIOF.items() %}
@@ -320,7 +372,7 @@
             "@id": "{{ SITEURL }}#person",
             "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "{{ SITEURL }}/chi-sono/"
+                "@id": "{{ SITEURL }}/{{ AUTHOR_URL }}"
              },
             "name": "{{ AUTHOR }}",
             "description": "{{ SCHEMA_PERSONAL_DESCRIPTION }}",
@@ -344,6 +396,19 @@
                 {% else %}
                 },
                 {% endif %}
+                {% endfor %}
+            "knowsAbout": [
+                {% for service, links in SCHEMA_KNOWSABOUT %}
+                {
+                    "@type": "Service",
+                    "name": "{{ service }}",
+                    "sameAs": [
+                    "{{ links }}"]
+                    {% if loop.last %}
+                }],
+                    {% else %}
+                },
+                    {% endif %}
                 {% endfor %}
             "alumniOf": [
             {% for education_center, links in SCHEMA_ALUMNIOF.items() %}
@@ -404,7 +469,7 @@
             "@id": "{{ SITEURL }}#person",
             "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "{{ SITEURL }}/chi-sono/"
+                "@id": "{{ SITEURL }}/{{ AUTHOR_URL }}"
              },
             "name": "{{ AUTHOR }}",
             "description": "{{ SCHEMA_PERSONAL_DESCRIPTION }}",
@@ -429,6 +494,19 @@
                 },
                 {% endif %}
                 {% endfor %}
+            "knowsAbout": [
+            {% for service, links in SCHEMA_KNOWSABOUT %}
+            {
+                "@type": "Service",
+                "name": "{{ service }}",
+                "sameAs": [
+                "{{ links }}"]
+                {% if loop.last %}
+            }],
+                {% else %}
+            },
+                {% endif %}
+            {% endfor %}
             "alumniOf": [
             {% for education_center, links in SCHEMA_ALUMNIOF.items() %}
             {

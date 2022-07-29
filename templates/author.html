@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block head %}
 {{ super() }}
-<link rel="canonical" href="{{ SITEURL }}/chi-sono/" />
-<meta property="og:url" content="{{ SITEURL }}/chi-sono/"/>
+<link rel="canonical" href="{{ SITEURL }}/{{ AUTHOR_URL }}" />
+<meta property="og:url" content="{{ SITEURL }}/{{ AUTHOR_URL }}"/>
 <meta name="type" content="about">
 {% endblock head %}
-{% block title %}Chi sono - {{ SITENAME }}{% endblock title %}
-{% block ogtitle %}Chi sono - {{ SITENAME }}{% endblock ogtitle %}
-{% block ogtitle2 %}Chi sono - {{ SITENAME }}{% endblock ogtitle2 %}
+{% block title %}About me - {{ SITENAME }}{% endblock title %}
+{% block ogtitle %}About me - {{ SITENAME }}{% endblock ogtitle %}
+{% block ogtitle2 %}About me - {{ SITENAME }}{% endblock ogtitle2 %}
 
 {% block description %}{{ AUTHORS.get(author|string).short_description }}{% endblock description %}
 {% block description2 %}{{ AUTHORS.get(author|string).short_description }}{% endblock description2 %}
@@ -24,12 +24,11 @@
         <p class="author-description">
             {{ AUTHORS.get(author|string).description }}
         </p>
-        <a href="{{ SITEURL }}/blog/">blog</a>
         {% for name, link in AUTHORS.get(author|string).links %}
         <a rel="noopener" href="{{ link }}" target="_blank">{{ name }}</a>
         {% endfor %}
         <div class="author-page-divider">
-            <h2>Chi sono</h2>
+            <h2>About me</h2>
         </div>
         <p class="author-description long-description">
             {{ AUTHORS.get(author|string).long_description }}
@@ -38,7 +37,7 @@
 </div>
 
 <div class="author-page-divider articles_container">
-    <h2>Il mio lavoro</h2>
+    <h2>About my job</h2>
     <p class="author-description long-description">
         {{ AUTHORS.get(author|string).work_description }}
     </p>
@@ -56,7 +55,7 @@
 {% endif %}
 
 <div class="author-page-divider">
-    <h2>I miei progetti</h2>
+    <h2>The projects I'm working on</h2>
 </div>
 <section class="nav-spacer">
     <article id="cc-slider" class="slider-container">
@@ -74,8 +73,8 @@
                 {% for project, project_info in PROJECTS|dictsort %}
                 <article>
                     <picture>
-                        <source type="image/webp" srcset="{{ SITEURL }}/theme/img/progetti/{{ PROJECTS.get(project|string).image_webp }}">
-                        <img loading="lazy" src="{{ SITEURL }}/theme/img/progetti/{{ PROJECTS.get(project|string).image_jpg }}" alt="{{ PROJECTS.get(project|string).alt_tag }}" />
+                        <source type="image/webp" srcset="{{ SITEURL }}/theme/img/projects/{{ PROJECTS.get(project|string).image_webp }}">
+                        <img loading="lazy" src="{{ SITEURL }}/theme/img/projects/{{ PROJECTS.get(project|string).image_jpg }}" alt="{{ PROJECTS.get(project|string).alt_tag }}" />
                     </picture>
                     <div class="cctooltip">
                       <h3>{{ project }}</h3>
@@ -90,7 +89,7 @@
 </section>
 
 <div class="author-page-divider">
-    <h2>I miei ultimi post</h2>
+    <h2>Latest posts</h2>
 </div>
 <section class="nav-spacer">
     {% block content_title %}

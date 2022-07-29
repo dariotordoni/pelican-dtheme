@@ -15,19 +15,19 @@
       <p>{{ CATEGORIES.get(category|string).project_description }}</p>
       {% endif %}
       {% if CATEGORIES.get(category|string).project_tool %}
-      <p><strong>Tool di gestione progetto:</strong> {{ CATEGORIES.get(category|string).project_tool }}</p>
+      <p><strong>Project management software:</strong> {{ CATEGORIES.get(category|string).project_tool }}</p>
       {% endif %}
       {% if CATEGORIES.get(category|string).project_lang %}
-      <p><strong>Linguaggio progetto:</strong> {{ CATEGORIES.get(category|string).project_lang }}</p>
+      <p><strong>Programming language:</strong> {{ CATEGORIES.get(category|string).project_lang }}</p>
       {% endif %}
       {% if CATEGORIES.get(category|string).project_version %}
-      <p><strong>Versione attuale:</strong> {{ CATEGORIES.get(category|string).project_version }}</p>
+      <p><strong>Version:</strong> {{ CATEGORIES.get(category|string).project_version }}</p>
       {% endif %}
       {% if CATEGORIES.get(category|string).project_links %}
       <p><strong>Link:</strong> {{ CATEGORIES.get(category|string).project_links }}</p>
       {% endif %}
       {% if CATEGORIES.get(category|string).project_author %}
-      <p><strong>Autore:</strong> <a href="{{ SITEURL }}/chi-sono/">{{ CATEGORIES.get(category|string).project_author }}</p></a>
+      <p><strong>Author:</strong> <a href="{{ SITEURL }}/{{ AUTHOR_URL }}">{{ CATEGORIES.get(category|string).project_author }}</p></a>
       {% endif %}
     </span>
     {% else %}

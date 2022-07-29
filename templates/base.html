@@ -3,7 +3,7 @@
     <head>
         {% block head %}
         <meta charset="utf-8" />
-        <title>{% block title %}{{ SITENAME }} - Digital Analyst{% endblock title %}</title>
+        <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
         <meta name="Description" content="{% block description %}{{ SITEDESCRIPTION }}{% endblock description %}"/>
         <meta property="og:title" content="{% block ogtitle %}{{ SITENAME }}{% endblock ogtitle %}"/>
         <meta property="og:description" content="{% block description2 %}{{ SITEDESCRIPTION }}{% endblock description2 %}"/>
@@ -15,7 +15,6 @@
         <meta name="twitter:description" content="{% block description3 %}{{ SITEDESCRIPTION }}{% endblock description3 %}">
         <!-- <meta name="twitter:image" content="{{ SITEURL }}/{{ IMG }}/{{ COVER }}"> -->
         {% include 'common.html' %}
-        {% include 'pwa.html' %}
         {% if TRACKING %}
             {{ TRACKING }}
         {% endif %}
@@ -60,7 +59,7 @@
         </nav>
         {% block content %}
         {% endblock %}
-        <footer id="footer"><a rel="noopener" class="footer-link" href="https://blog.getpelican.com/">Pelican</a> | <a rel="noopener" class="footer-link" href="https://github.com/dariotordoni/pelican-dtheme">DTheme</a>
+        <footer id="footer"><a class="footer-link" target="_blank" href="{{ SITEURL }}/privacy_policy.pdf" title="privacy policy" rel="nofollow">Privacy</a> | <a class="footer-link" href="{{ SITEURL }}/sitemap/">Sitemap</a> | © 2020-{{ COPY_YEAR }} {{ AUTHOR }}
         </footer>
     </body>
 </html>

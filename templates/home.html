@@ -22,8 +22,8 @@
         <p class="author-description">
             {{ AUTHORS.get(AUTHOR|string).description }}
         </p>
-        <a href="{{ SITEURL }}/blog/">blog</a>
-        <a href="{{ SITEURL }}/chi-sono/">about</a>
+        <!-- <a href="{{ SITEURL }}/blog/">blog</a> -->
+        <a href="{{ SITEURL }}/{{ AUTHOR_URL }}">about</a>
         {% for name, link in AUTHORS.get(AUTHOR|string).links %}
         <a rel="noopener" href="{{ link }}" target="_blank">{{ name }}</a>
         {% endfor %}

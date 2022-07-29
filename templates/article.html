@@ -2,7 +2,7 @@
 {% block head %}
   {{ super() }}
   {% if article.description %}
-    <meta name="description" content="{{article.description}}" />
+  <meta name="description" content="{{article.description}}" />
   {% endif %}
 
   {% for tag in article.tags %}
@@ -36,14 +36,14 @@
       {{ article.locale_date }}
     </time>
     {% if article.readtime %}
-    <div>lettura: {{article.readtime.minutes}} min.</div>
+    <div>read time: {{article.readtime.minutes}} min.</div>
     {% endif %}
     {% if article.modified %}
     <time datetime="{{ article.modified.isoformat() }}">
     </time>
     {{ article.locale_modified }}
     {% endif %}
-    <p>categoria: <a href="{{ SITEURL }}/cat/{{ category }}/">{{ article.category }}</a></p>
+    <p>category: <a class="post-tag" href="{{ SITEURL }}/cat/{{ category }}/">{{ article.category }}</a></p>
     </section>
   </footer><!-- /.post-info -->
   <picture>
@@ -62,13 +62,20 @@
   {% if article.toc %}
     {{article.toc}}
 {% endif %}
+{% if article.language == "it" %}
+<div id="migration-div">
+  <p>
+    Ho migrato questo sito dal'italiano all'inglese, questo è uno dei primi articoli scritti in italiano, che ho deciso di mantenere. Se preferisci leggere la versione in inglese la trovi <a href="{{ SITEDATA }}/blog{{ article.hreflang_en }}">qui</a>.
+  </p>
+</div>
+{% endif %}
   <div class="entry-content">
     {{ article.content }}
   </div><!-- /.entry-content -->
 </section>
 {% if article.prev_article_in_category or article.next_article_in_category %}
   <section id="related">
-      <p>ALTRI ARTICOLI DELLA CATEGORIA</p>
+      <p>ARTICLES IN THE SAME CATEGORY</p>
       <ol class="articles_container">
         {% include 'article_listing_related.html' %}
       </ol>
@@ -80,7 +87,7 @@
         <div class="flex-v-center">
           <picture>
             <source type="image/webp" srcset="{{ SITEURL }}{{ article.cat_webp }}">
-              <img loading="lazy" width="50px" height="50px" src="{{ SITEURL }}{{ article.cat_jpg }}" alt="La categoria {{ article.category }}" />
+              <img loading="lazy" width="50px" height="50px" src="{{ SITEURL }}{{ article.cat_jpg }}" alt="{{ article.category }} category" />
             </picture>
             <a href="{{ SITEURL }}/cat/{{ category }}/">{{ article.category }}</a>
           </div>

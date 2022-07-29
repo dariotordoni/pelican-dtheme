@@ -4,7 +4,7 @@
         <section class="related-section-desc">
             <section class="article-section-title">
                 <h2>
-                    <a href="{{ SITEURL }}/blog/{{ article.prev_article_in_category.slug }}/" rel="bookmark" title="Leggi {{ article.prev_article_in_category.title|striptags }}">{{ article.prev_article_in_category.title }}
+                    <a href="{{ SITEURL }}/blog/{{ article.prev_article_in_category.slug }}/" rel="bookmark" title="{{ article.prev_article_in_category.title|striptags }}">{{ article.prev_article_in_category.title }}
                     </a>
                 </h2>
                 <time class="published" datetime="{{ article.prev_article_in_category.date.isoformat() }}"> {{ article.prev_article_in_category.locale_date }} </time>
@@ -15,18 +15,18 @@
                 </section>
                 <section>
                     {% if article.prev_article_in_category.readtime %}
-                    lettura: {{article.prev_article_in_category.readtime.minutes}} min. / 
+                    read time: {{article.prev_article_in_category.readtime.minutes}} min. /
                     {% endif %}
-                    categoria: <a href="{{ SITEURL }}/cat/{{ article.prev_article_in_category.category }}/">{{ article.prev_article_in_category.category }}</a>
+                    category: <a class="post-tag" href="{{ SITEURL }}/cat/{{ article.prev_article_in_category.category }}/">{{ article.prev_article_in_category.category }}</a>
                 </section>
             </section>
         </section>
         <section class="related-section-desc-2">
             <a href="{{ SITEURL }}/blog/{{ article.prev_article_in_category.slug }}/" rel="bookmark" title="{{ article.prev_article_in_category.title|striptags }}">
-                <span id="previous-article" class="next-previous">precedente</span>
+                <span id="previous-article" class="next-previous">previous</span>
                 <picture>
                     <source type="image/webp" srcset="{{ SITEURL }}{{ article.prev_article_in_category.thumb_webp }}">
-                        <img width="350px" height="179px" loading="lazy" src="{{ SITEURL }}{{ article.prev_article_in_category.thumb_jpg }}" alt="copertina di {{ article.prev_article_in_category.title }}" />
+                        <img width="350px" height="179px" loading="lazy" src="{{ SITEURL }}{{ article.prev_article_in_category.thumb_jpg }}" alt="cover image of {{ article.prev_article_in_category.title }}" />
                 </picture>
             </a>
         </section>
@@ -39,7 +39,7 @@
         <section class="related-section-desc">
             <section class="article-section-title">
                 <h2>
-                    <a href="{{ SITEURL }}/blog/{{ article.next_article_in_category.slug }}/" rel="bookmark" title="Leggi {{ article.next_article_in_category.title|striptags }}">{{ article.next_article_in_category.title }}
+                    <a href="{{ SITEURL }}/blog/{{ article.next_article_in_category.slug }}/" rel="bookmark" title="{{ article.next_article_in_category.title|striptags }}">{{ article.next_article_in_category.title }}
                     </a>
                 </h2>
                 <time class="published" datetime="{{ article.next_article_in_category.date.isoformat() }}"> {{ article.next_article_in_category.locale_date }} </time>
@@ -50,18 +50,18 @@
                 </section>
                 <section>
                     {% if article.next_article_in_category.readtime %}
-                    lettura: {{article.next_article_in_category.readtime.minutes}} min. / 
+                    read time: {{article.next_article_in_category.readtime.minutes}} min. /
                     {% endif %}
-                    categoria: <a href="{{ SITEURL }}/cat/{{ article.next_article_in_category.category }}/">{{ article.next_article_in_category.category }}</a>
+                    category: <a class="post-tag" href="{{ SITEURL }}/cat/{{ article.next_article_in_category.category }}/">{{ article.next_article_in_category.category }}</a>
                 </section>
             </section>
         </section>
         <section class="related-section-desc-2">
             <a href="{{ SITEURL }}/blog/{{ article.next_article_in_category.slug }}/" rel="bookmark" title="{{ article.next_article_in_category.title|striptags }}">
-                <span id="next-article" class="next-previous">successivo</span>
+                <span id="next-article" class="next-previous">following</span>
                 <picture>
                     <source type="image/webp" srcset="{{ SITEURL }}{{ article.next_article_in_category.thumb_webp }}">
-                    <img width="350px" height="179px" loading="lazy" src="{{ SITEURL }}{{ article.next_article_in_category.thumb_jpg }}" alt="copertina di {{ article.next_article_in_category.title }}" />
+                    <img width="350px" height="179px" loading="lazy" src="{{ SITEURL }}{{ article.next_article_in_category.thumb_jpg }}" alt="cover image of {{ article.next_article_in_category.title }}" />
                 </picture>
             </a>
         </section>

@@ -15,13 +15,12 @@ DTheme is a theme developed for Pelican. The goal is to create a theme that allo
 * dark and light theme
 * native fonts (no external font sources, for a faster and lighter experience)
 * related articles (thanks to the "neighbors" plugin. Here the theme shows articles categorized with the same category of the main article)
-* Google Tag Manager ready, with the possibility of adding custom tracking inside the head tag
+* Google Tag Manager or other Tag Management System ready, with the possibility of adding custom tracking directly inside the head tag, usefull for tracking software like Google Analytics or Matomo (Piwik).
 
 ### known issues:
 * slug or internal links are, sometimes, hardcoded
 * slug or internal links are, sometimes, in italian
-* errors logged in console. This does not make it possible to reach the maximum score on lighthouse audit for every page
-* the progressive web app does not work offline
+* the progressive web app does not work
 * the documentation is not even close to the one I would like to write
 * the theme is lacking of flexibility
 * the theme does not manage images inside the article content yet. There are no classes or automatic styling techniques, but I am planning to write a plugin to do so. Inside my personal website I don't use pics apart from the main one
@@ -32,7 +31,7 @@ Some plugins are needed in order for the theme to work:
 * [sitemap](https://github.com/getpelican/pelican-plugins/tree/master/sitemap)
 * [cover_resizer](https://github.com/dariotordoni/pelican-cover-resizer)
 * [neighbors](https://github.com/getpelican/pelican-plugins/tree/master/neighbors)
-* [pelican-toc](https://github.com/ingwinlu/pelican-toc) I just made some changes here, but haven't proposed them to its developer yet
+* [pelican-toc](https://github.com/ingwinlu/pelican-toc) At the moment of writing, this plugin still need to be ported into the new plugin organization of Pelican. I removed it from the theme
 * [minification](https://pypi.org/project/pelican-minification/) 
 
 Table of content:
@@ -67,12 +66,13 @@ CSS_PATH = 'css' # legacy code, think about removing
 IMG = "theme/img"
 IMAGES_PATH = 'theme'
 THEME = 'theme/dtheme'
-TIMEZONE = 'Europe/Rome'
-DEFAULT_LANG = u'it'
+LOCALE = 'en_US.utf8'
+TIMEZONE = ''
+DEFAULT_LANG = u'en'
 TWITTERNAME = "" #twitter user name @example
 PATH = 'content'
 STATIC_PATHS = ['extra']
-MENUITEMS = (('BLOG', '/blog/'),('ABOUT', '/chi-sono/'),) # the template is made for a two menu items, blog and about page. In this way I can manage the menu without using a hamburger menu and without using a javascript. Also, I don't need more than two menu items right one. At the moment there is a misconfiguration and this settings field is also in publishconf.py file, better to use the one in the publishconf.
+MENUITEMS = (('BLOG', '/blog/'),('ABOUT', '/about/'),) # the template is made for a two menu items, blog and about page. In this way I can manage the menu without using a hamburger menu and without using a javascript. Also, I don't need more than two menu items right one. At the moment there is a misconfiguration and this settings field is also in publishconf.py file, better to use the one in the publishconf.
 
 EXTRA_PATH_METADATA = { # use extra_path_metadata for static file needed in the root path. Remove the ones you don't need. Examples:
     'extra/robots.txt': {'path': 'robots.txt'},
@@ -85,13 +85,13 @@ EXTRA_PATH_METADATA = { # use extra_path_metadata for static file needed in the 
     }
 ```
 ### Tracking section
-Google tag manager only works if the variable GTM in publishconf.py it's true
+Google tag manager (or other Tag Management System) only works if the variable GTM in publishconf.py it's true
 ```bash
 GTM_HEAD = """ """ # Google tag manager script for the header section
 GTM_BODY = """ """ # Google tag manager script for the body section
 ```
 ```bash
-TRACKING = """ """ # I use this section to install custom tracking service like Google Analytics or other tools (fathom, plausible, goat analytics etc)
+TRACKING = """ """ # I use this section to install custom tracking service like Google Analytics or other tools (fathom, plausible, goat analytics, Matomo, Piwik etc)
 ```
 ### Schema structured data section
 I just give a one key example, but use as much keys as you need
@@ -111,6 +111,10 @@ SCHEMA_PERSONAL_DESCRIPTION = "" # your personal description
 
 SCHEMA_LINK_SAMEAS = {
     ('', ''), # name and link of your same as (ex. "linkedin", "https://linkedin.com/myprofile"). Add comma and continue adding key/values if needed
+}
+
+SCHEMA_KNOWSABOUT = {
+    ('', ''), # name and reference of the known topic (ex. "SEO", "https://en.wikipedia.org/wiki/Search_engine_optimization"). Add comma and continue adding key/values if needed
 }
 ```
 ### Various
@@ -140,8 +144,8 @@ ARTICLE_URL = 'blog/{slug}/'
 ARTICLE_SAVE_AS = 'blog/{slug}/index.html'
 ARTICLE_ORDER_BY = 'reversed-date'
 
-AUTHOR_URL = 'chi-sono/'
-AUTHOR_SAVE_AS = 'chi-sono/index.html'
+AUTHOR_URL = 'about/'
+AUTHOR_SAVE_AS = 'about/index.html'
 
 HOME_URL = 'index.html'
 HOME_SAVE_AS = 'index.html'
@@ -152,11 +156,8 @@ BLOG_INDEX_SAVE_AS = 'blog/index.html'
 CATEGORY_URL = 'cat/{slug}/'
 CATEGORY_SAVE_AS = 'cat/{slug}/index.html'
 
-SITEMAP_URL = 'mappa-sito/'
-SITEMAP_SAVE_AS = 'mappa-sito/index.html'
-
-UTMBUILDER_URL = 'utmbuilder/'
-UTMBUILDER_SAVE_AS = 'utmbuilder/index.html'
+SITEMAP_URL = 'sitemap/'
+SITEMAP_SAVE_AS = 'sitemap/index.html'
 
 ERROR_URL = '404/'
 ERROR_SAVE_AS = '404/index.html'
@@ -177,10 +178,10 @@ AUTHORS = {
         'short_description': """""", # used for the author info card inside at the bottom of the articles
         'description': """ """, # used inside the about page, immediately below the authore picture
         'long_description': """ """, #this is the long description placed inside the author about page
-        'url': '/chi-sono/',
-        'image_jpg': '/theme/img/autore/your-name.jpg', # used as author avatar
-        'image_webp': '/theme/img/autore/your-name.webp', # used as author avatar
-        'image_schema': '/theme/img/autore/your-name.jpg', # used for structured data
+        'url': '/about/',
+        'image_jpg': '/theme/img/author/your-name.jpg', # used as author avatar
+        'image_webp': '/theme/img/author/your-name.webp', # used as author avatar
+        'image_schema': '/theme/img/author/your-name.jpg', # used for structured data
         'links': (('email', 'mailto:example@mail.com'),
                   ('linkedin', ''),
                   ('twitter', ''),
@@ -321,9 +322,9 @@ Here the file you need to edit for the pwa. There is also a "sw.js" service work
 ## Filo to provide
 I removed some files from the theme, you need to provide them by yourself
 ```bash
-author pics under "/static/img/autore" folder
+author pics under "/static/img/author" folder
 cat pics under "/static/img/cat" folder
-projects pics under "/static/img/progetti"
+projects pics under "/static/img/projects"
 favicon under "/static/img/" folder
     favicon.ico # this one should not be necessary anymore
     favicon57.ico
@@ -345,9 +346,9 @@ cookie-policy.pdf under "/content/extra/" folder # the template has no privacy p
 ## How create new content
 I like writing content using html. I created the "new-html.py" file in order to facilitate myself creating new content. Run it in this way
 ```bash
-python new-html.py slug-of-the-post category
+python new-html.py lang slug-of-the-post category
 ex.
-python new-html.py hello-world-this-is-my-first-post coding
+python new-html.py en hello-world-this-is-my-first-post coding
 ```
 The script will create a new html file called as the slug provided. Inside the file, you will find several meta tags, some of them already filled
 ```bash

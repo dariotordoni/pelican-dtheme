@@ -2,10 +2,7 @@
 {% if articles_page.has_other_pages() %}
 {% block head %}
     {{ super() }}
-    {% if category %}
-      <link rel="canonical" href="{{ SITEURL }}/cat/{{ category }}/" />
-      <meta property="og:url" content="{{ SITEURL }}/cat/{{ category }}/"/>
-    {% elif articles_page.url == 'blog/index.html' %}
+    {% if articles_page.url == 'blog/index.html' %}
     <link rel="canonical" href="{{ SITEURL }}/blog/" />
     <meta property="og:url" content="{{ SITEURL }}/blog/"/>
     {% else %}
@@ -32,10 +29,12 @@
 Blog - {{ SITENAME }}
 {% elif articles_page.url == 'blog/' %}
 Blog - {{ SITENAME }}
-{% elif articles_page.url == 'mappa-sito/' %}
-Mappa del sito - {{ SITENAME }}
+{% elif "blog/" in articles_page.url %}
+Blog - {{ SITENAME }}
+{% elif articles_page.url == 'sitemap/' %}
+Sitemap - {{ SITENAME }}
 {% else %}
-Chi sono - {{ SITENAME }}
+About me - {{ SITENAME }}
 {% endif %}
 {% endblock title %}
 
@@ -46,10 +45,12 @@ Chi sono - {{ SITENAME }}
 {{ CATEGORIES.get('blog'|string).description }}
 {% elif articles_page.url == 'blog/' %}
 {{ CATEGORIES.get('blog'|string).description }}
-{% elif articles_page.url == 'mappa-sito/' %}
-La mappa html del mio sito.
+{% elif "blog/" in articles_page.url %}
+{{ CATEGORIES.get('blog'|string).description }}
+{% elif articles_page.url == 'sitemap/' %}
+The html sitemap.
 {% else %}
-Chi sono - {{ SITENAME }}
+About me - {{ SITENAME }}
 {% endif %}
 {% endblock description %}
 
@@ -60,10 +61,12 @@ Chi sono - {{ SITENAME }}
 {{ CATEGORIES.get('blog'|string).description }}
 {% elif articles_page.url == 'blog/' %}
 {{ CATEGORIES.get('blog'|string).description }}
-{% elif articles_page.url == 'mappa-sito/' %}
-La mappa html del mio sito.
+{% elif "blog/" in articles_page.url %}
+{{ CATEGORIES.get('blog'|string).description }}
+{% elif articles_page.url == 'sitemap/' %}
+The html sitemap.
 {% else %}
-Chi sono - {{ SITENAME }}
+About me - {{ SITENAME }}
 {% endif %}
 {% endblock description2 %}
 
@@ -74,34 +77,63 @@ Chi sono - {{ SITENAME }}
 {{ CATEGORIES.get('blog'|string).description }}
 {% elif articles_page.url == 'blog/' %}
 {{ CATEGORIES.get('blog'|string).description }}
-{% elif articles_page.url == 'mappa-sito/' %}
-La mappa html del mio sito.
+{% elif "blog/" in articles_page.url %}
+{{ CATEGORIES.get('blog'|string).description }}
+{% elif articles_page.url == 'sitemap/' %}
+The html sitemap.
 {% else %}
-Chi sono - {{ SITENAME }}
+About me - {{ SITENAME }}
 {% endif %}
 {% endblock description3 %}
 
 {% block content %}
-        <section class="nav-spacer">
-        {% block content_title %}
-        <section class="blog-listing-title">
-            <h1>Blog</h1>
-            {% if CATEGORIES.get('blog'|string).logo_jpg %}
-            <picture>
-                <source type="image/webp" srcset="{{ CATEGORIES.get('blog'|string).logo_webp }}">
-                <img src="{{ CATEGORIES.get('blog'|string).logo_jpg }}" alt="" />
-            </picture>
-            {% endif %}
-            <p>{{ CATEGORIES.get("blog").description }}</p>
-        </section>
-        {% endblock %}
-            <ol class="articles_container">
-                {% for article in articles_page.object_list %}
-                    {% include 'article_listing.html' %}
-                {% endfor %}
-            </ol>
-            {% if articles_page.has_other_pages() %}
-                {% include 'pagination.html' %}
-            {% endif %}
+        <section class="nav-spacer-listing">
+            <section class="nav-post">
+            {% block content_title %}
+            <section class="blog-listing-title">
+                <h1>Blog</h1>
+                {% if CATEGORIES.get('blog'|string).logo_jpg %}
+                <picture>
+                    <source type="image/webp" srcset="{{ CATEGORIES.get('blog'|string).logo_webp }}">
+                    <img src="{{ CATEGORIES.get('blog'|string).logo_jpg }}" alt="{{ AUTHOR }}'s blog" />
+                </picture>
+                {% endif %}
+                <p>{{ CATEGORIES.get("blog").description }}</p>
+            </section>
+            {% endblock %}
+                <ol class="articles_container">
+                    {% for article in articles_page.object_list %}
+                        {% include 'article_listing.html' %}
+                    {% endfor %}
+                </ol>
+                {% if articles_page.has_other_pages() %}
+                    {% include 'pagination.html' %}
+                {% endif %}
+            </section>
+            <aside class="nav-sidebar">
+                <div class="widget-container">
+                    <div class="author-profile widget">
+                        <picture>
+                            <source type="image/webp" srcset="{{ SITEURL }}{{ AUTHORS.get(AUTHOR|string).image_webp }} 80w 80h">
+                            <img width="80px" height="80px" src="{{ SITEURL }}{{ AUTHORS.get(AUTHOR|string).image_jpg }}" alt="{{ AUTHOR }}" />
+                        </picture>
+                        <p class="author-description">
+                            {{ AUTHOR }}
+                        </p>
+                        <a href="{{ SITEURL }}/{{ AUTHOR_URL }}">about</a>
+                        {% for name, link in AUTHORS.get(AUTHOR|string).links %}
+                        <a rel="noopener" href="{{ link }}" target="_blank">{{ name }}</a>
+                        {% endfor %}
+                    </div>
+                    <div class="category-widget widget">
+                        <h2># categories</h2>
+                        {% for category in CATEGORIES %}
+                            {% if category != 'blog' %}
+                                <a class="post-tag" href="{{ SITEURL }}/cat/{{ category }}/">{{ category }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </aside>
         </section>
 {% endblock content %}
