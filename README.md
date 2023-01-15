@@ -1,9 +1,9 @@
 # pelican-dtheme
 
 This is not a documentation, but it is the closest thing to a documentation that I can do right now. I hope it will be useful.
-[Here](https://www.dariotordoni.it) you can find my personal website where I use, at the time of writing, this theme.
+[Here](https://www.dariotordoni.com) you can find my personal website where I use, at the time of writing, this theme.
 
-DTheme is a theme developed for Pelican. The goal is to create a theme that allows people to generate a fast website, lightweight, attentive to the metrics of web vitals and SEO oriented. Here some of the features:
+DTheme is a Pelican theme. The goal is to create a theme that allows people to generate a fast website, lightweight, attentive to the metrics of web vitals and SEO oriented. Here some of the features:
 * native lazy load
 * images optimizations for [web vitals](https://web.dev/vitals/)
 * support for webp images
@@ -18,11 +18,8 @@ DTheme is a theme developed for Pelican. The goal is to create a theme that allo
 * Google Tag Manager or other Tag Management System ready, with the possibility of adding custom tracking directly inside the head tag, usefull for tracking software like Google Analytics or Matomo (Piwik).
 
 ### known issues:
-* slug or internal links are, sometimes, hardcoded
-* slug or internal links are, sometimes, in italian
 * the progressive web app does not work
 * the documentation is not even close to the one I would like to write
-* the theme is lacking of flexibility
 * the theme does not manage images inside the article content yet. There are no classes or automatic styling techniques, but I am planning to write a plugin to do so. Inside my personal website I don't use pics apart from the main one
 * other issues that I do not remember or I have still not found. If you find them, [contact me](mailto:tordoni.dario@gmail.com)
 
@@ -31,8 +28,10 @@ Some plugins are needed in order for the theme to work:
 * [sitemap](https://github.com/getpelican/pelican-plugins/tree/master/sitemap)
 * [cover_resizer](https://github.com/dariotordoni/pelican-cover-resizer)
 * [neighbors](https://github.com/getpelican/pelican-plugins/tree/master/neighbors)
-* [pelican-toc](https://github.com/ingwinlu/pelican-toc) At the moment of writing, this plugin still need to be ported into the new plugin organization of Pelican. I removed it from the theme
-* [minification](https://pypi.org/project/pelican-minification/) 
+* [feed link decorator](https://github.com/dariotordoni/pelican-feed-link-decorator)
+* [pelican-toc](https://github.com/ingwinlu/pelican-toc) (temporary removed)
+
+At the moment of writing, this plugin still need to be ported into the new plugin organization of Pelican. I removed it from the theme
 
 Table of content:
 * [Pelicanconf](#pelicanconf)
@@ -62,6 +61,7 @@ SITENAME = u'' # sitename
 SITEURL = '' # site url https://www.example.it
 SITEDESCRIPTION = "" # meta description
 BLOGNAME = u''
+BLOG_OG_IMAGE = '' #the name of image used as open graph image https://ogp.me/
 CSS_PATH = 'css' # legacy code, think about removing
 IMG = "theme/img"
 IMAGES_PATH = 'theme'
@@ -70,9 +70,12 @@ LOCALE = 'en_US.utf8'
 TIMEZONE = ''
 DEFAULT_LANG = u'en'
 TWITTERNAME = "" #twitter user name @example
+COPY_YEAR = date.today().year # automatic updater for the copy year on the footer
 PATH = 'content'
 STATIC_PATHS = ['extra']
-MENUITEMS = (('BLOG', '/blog/'),('ABOUT', '/about/'),) # the template is made for a two menu items, blog and about page. In this way I can manage the menu without using a hamburger menu and without using a javascript. Also, I don't need more than two menu items right one. At the moment there is a misconfiguration and this settings field is also in publishconf.py file, better to use the one in the publishconf.
+MENUITEMS = (('BLOG', '/blog/'),('ABOUT', '/about/'),)
+
+# the template is made for a two menu items, blog and about page. In this way I can manage the menu without using a hamburger menu and without using a javascript. Also, I don't need more than two menu items right one. At the moment there is a misconfiguration and this settings field is also in publishconf.py file, better to use the one in the publishconf.
 
 EXTRA_PATH_METADATA = { # use extra_path_metadata for static file needed in the root path. Remove the ones you don't need. Examples:
     'extra/robots.txt': {'path': 'robots.txt'},
@@ -80,7 +83,7 @@ EXTRA_PATH_METADATA = { # use extra_path_metadata for static file needed in the 
     'extra/manifest.json': {'path': 'manifest.json'},
     'extra/cookie_policy.pdf': {'path': 'cookie_policy.pdf'},
     'extra/privacy_policy.pdf': {'path': 'privacy_policy.pdf'},
-    'extra/.htaccess': {'path': '.htaccess'},
+    'extra/.htaccess': {'path': '.htaccess'}, # IMPORTANT, create your htaccess
     'extra/favicon.ico': {'path': 'favicon.ico'}
     }
 ```
@@ -125,6 +128,7 @@ FEED_MAX_ITEMS = 10
 RSS_FEED_SUMMARY_ONLY = True
 FEED_ALL_RSS = 'feeds/all.rss.xml'
 FEED_ALL_ATOM = None
+CATEGORY_FEED_RSS = 'feeds/{slug}.rss.xml'
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
@@ -281,6 +285,7 @@ GTM = False # set True if want to install Google tag manager
 
 ## PWA
 Here the file you need to edit for the pwa. There is also a "sw.js" service worker, but I think you could leave it as it is.
+At the moment the service worker does not work, you can jump this PWA section.
 
 ### Manifest
 ```bash

@@ -11,6 +11,7 @@ SITENAME = u''
 SITEURL = ''
 SITEDESCRIPTION = ""
 BLOGNAME = u''
+BLOG_OG_IMAGE = ''
 CSS_PATH = 'css'
 IMG = "theme/img"
 IMAGES_PATH = 'theme'
@@ -73,6 +74,7 @@ FEED_MAX_ITEMS = 10
 RSS_FEED_SUMMARY_ONLY = True
 FEED_ALL_RSS = 'feeds/all.rss.xml'
 FEED_ALL_ATOM = None
+CATEGORY_FEED_RSS = 'feeds/{slug}.rss.xml'
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
@@ -157,7 +159,7 @@ CATEGORIES = {
 
 DISPLAY_CATEGORIES_ON_MENU = None
 DISPLAY_PAGES_ON_MENU = None
-RELATIVE_URLS = True
+RELATIVE_URLS = False
 LOAD_CONTENT_CACHE = False
 CACHE_CONTENT = False
 
@@ -178,12 +180,6 @@ PROJECTS = {
 #################
 PLUGIN_PATHS = ['plugin']
 PLUGINS = ['pelican-readtime', 'sitemap', 'cover_resizer', 'neighbors', 'feed_link_decorator']
-
-# MINIFY = {
-#   'remove_comments': True,
-#   'remove_all_empty_space': True,
-#   'remove_optional_attribute_quotes': False
-# }
 
 SITEMAP = {
     "format": "xml",
