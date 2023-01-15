@@ -324,7 +324,7 @@ At the moment the service worker does not work, you can jump this PWA section.
 
 
 
-## Filo to provide
+## File to provide
 I removed some files from the theme, you need to provide them by yourself
 ```bash
 author pics under "/static/img/author" folder
